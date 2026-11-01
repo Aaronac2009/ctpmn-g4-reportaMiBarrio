@@ -148,3 +148,58 @@ summary{
 .searchbar-img{
   width: 20px;
 }
+
+/*Lista de reportes*/
+
+.lista-reportes{
+  display: grid;
+  border-radius: 10px;
+  margin: 20px;
+  background-color: var(--DarkBlue);
+  color: #fff;
+}
+
+.lista-reportes-header{
+  background-color: #1C3152;
+  border-radius: 10px 10px 0 0;
+  display: flex;
+  font-weight: bold;
+  text-align: center;
+}
+
+.lista-reportes-header>p{
+  width: 17%;
+}
+
+.reporte{
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.reporte>p{
+  width: 17%;
+}
+
+.reporte>button{
+  width: 17%;
+  border: none;
+  background-color: transparent;
+  transition: all .3s ease ;
+  color: #fff;
+}
+
+.reporte>button:hover{
+  background-color: #1C3152;
+}
+
+
+.reporte:nth-child(odd){
+  background-color: #172943;
+}
+
+.reporte:nth-child(even){
+  background-color: #111D33;
+}
+

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import Navbar from './components/Navbar'
 import SearchBar from './components/SearchBar'
-
+import ListaReportes from './components/ListaReportes'
 
 function App() {
   const [reportes, setReportes] = useState([])
@@ -36,6 +36,7 @@ function App() {
       <Navbar></Navbar>
       <div className="main">
         <SearchBar></SearchBar>
+        <ListaReportes reportes={reportes}></ListaReportes>
       </div>
     </div>
   )
