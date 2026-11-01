@@ -1,0 +1,104 @@
+
+:root{
+  --DarkBlue: #080F1E;
+  --DarkerBlue: #011D33;
+  --Blue: #1C3152;
+}
+
+/* NavBar*/
+
+
+.navbar{
+  background-color: var(--DarkBlue);
+  width: 20%;
+  height: 100vh;
+  color: #fff;
+}
+
+.logo-img{
+  width:60%;
+  margin: 10px 0 30px 0;
+}
+
+.user{
+  display: grid;
+  justify-content: center;
+  width: 100%;
+  background-color: var(--DarkerBlue);
+  align-items: center;
+}
+
+.user-photo{
+  width: 30%;
+  border-radius: 50%;
+  margin: 20px auto 0px;
+}
+
+.user-name{
+  display: flex;
+  justify-content: center;
+  font-size: 28px;
+  align-items: center;
+}
+
+details{
+  position: relative;
+}
+
+.user-options{
+  position: fixed;
+  background-color: var(--Blue);;
+  width: 220px;
+  border-radius: 10px;
+}
+
+.user-options>button{
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  display: grid;
+  align-content: center;
+  width: 100%;
+  padding: 20px;
+  font-size: 20px
+
+}
+
+.user-options>button:hover{
+  background-color: var(--DarkBlue);
+  cursor: pointer;
+}
+
+.user-name>p{
+  margin-right: 10px;
+}
+
+summary{
+  color: #fff;
+}
+
+summary{
+  cursor: pointer;
+}
+
+.options{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.options>button{
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  padding: 20px 0;
+  color: #fff;
+  font-size: 22px;
+  transition: all .2s ease;
+}
+
+.options>button:hover{
+  background-color: var(--DarkerBlue);
+}

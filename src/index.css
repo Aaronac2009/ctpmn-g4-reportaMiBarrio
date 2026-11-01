@@ -1,0 +1,14 @@
+*{
+  box-sizing: border-box;
+}
+
+body{
+  margin: 0;
+  background-color: #011D33;
+
+}
+
+.app{
+  width: 100vw;
+  display: flex;
+}
