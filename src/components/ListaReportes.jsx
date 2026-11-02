@@ -10,13 +10,13 @@ export default function ListaReportes({reportes}){
                 <p>Imagen</p>
             </div>
             {reportes.map(reporte => (
-                <div className="reporte">
+                <div className="reporte" key={reporte.id}>
                     <p>{reporte.titulo}</p>
                     <p>{reporte.categoria}</p>
                     <p>{reporte.descripcion}</p>
                     <p>{reporte.direccion}</p>
                     <button>Si</button>
-                    <p>{reporte.imagen}</p>
+                    {reporte.imagen !== "" ? <div className="img-container"><img src={reporte.imagen}  alt="Porfavor funciona" width="50px"/></div>: <p>No</p>}
                 </div>
             ))}
         </div>

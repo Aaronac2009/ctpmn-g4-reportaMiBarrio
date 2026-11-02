@@ -1,5 +1,4 @@
-
-:root{
+:root {
   --DarkBlue: #080F1E;
   --DarkerBlue: #011D33;
   --Blue: #1C3152;
@@ -8,19 +7,19 @@
 /* NavBar*/
 
 
-.navbar{
+.navbar {
   background-color: var(--DarkBlue);
   width: 20%;
   height: 100vh;
   color: #fff;
 }
 
-.logo-img{
+.logo-img {
   height: 50px;
   margin: 10px 0 10px 0;
 }
 
-.user{
+.user {
   display: grid;
   justify-content: center;
   width: 100%;
@@ -28,31 +27,32 @@
   align-items: center;
 }
 
-.user-photo{
+.user-photo {
   width: 30%;
   border-radius: 50%;
   margin: 20px auto 0px;
 }
 
-.user-name{
+.user-name {
   display: flex;
   justify-content: center;
   font-size: 28px;
   align-items: center;
 }
 
-details{
+details {
   position: relative;
 }
 
-.user-options{
+.user-options {
   position: fixed;
-  background-color: var(--Blue);;
+  background-color: var(--Blue);
+  ;
   width: 220px;
   border-radius: 10px;
 }
 
-.user-options>button{
+.user-options>button {
   background-color: transparent;
   border: none;
   color: #fff;
@@ -61,27 +61,26 @@ details{
   width: 100%;
   padding: 20px;
   font-size: 20px
-
 }
 
-.user-options>button:hover{
+.user-options>button:hover {
   background-color: var(--DarkBlue);
   cursor: pointer;
 }
 
-.user-name>p{
+.user-name>p {
   margin-right: 10px;
 }
 
-summary{
+summary {
   color: #fff;
 }
 
-summary{
+summary {
   cursor: pointer;
 }
 
-.options{
+.options {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -89,7 +88,7 @@ summary{
   justify-content: center;
 }
 
-.options>button{
+.options>button {
   width: 100%;
   background-color: transparent;
   border: none;
@@ -100,19 +99,19 @@ summary{
   border-bottom: 1px solid #34517f;
 }
 
-.options>button:hover{
+.options>button:hover {
   background-color: var(--DarkerBlue);
 }
 
 /*Main*/
 
-.main{
+.main {
   width: 80%;
 }
 
 /* Main - SearchBar */
 
-.searchbar{
+.searchbar {
   width: 100%;
   height: 74px;
   padding: 10px 0 10px 0;
@@ -122,7 +121,7 @@ summary{
   align-items: center;
 }
 
-.searchbar>input{
+.searchbar>input {
   width: 50%;
   height: 40px;
   background-color: var(--DarkerBlue);
@@ -133,11 +132,11 @@ summary{
   color: #fff;
 }
 
-.searchbar>input::placeholder{
+.searchbar>input::placeholder {
   color: rgb(83, 148, 178);
 }
 
-.searchbar-button{
+.searchbar-button {
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -145,13 +144,13 @@ summary{
   border: none;
 }
 
-.searchbar-img{
+.searchbar-img {
   width: 20px;
 }
 
 /*Lista de reportes*/
 
-.lista-reportes{
+.lista-reportes {
   display: grid;
   border-radius: 10px;
   margin: 20px;
@@ -159,7 +158,7 @@ summary{
   color: #fff;
 }
 
-.lista-reportes-header{
+.lista-reportes-header {
   background-color: #1C3152;
   border-radius: 10px 10px 0 0;
   display: flex;
@@ -167,39 +166,152 @@ summary{
   text-align: center;
 }
 
-.lista-reportes-header>p{
+.lista-reportes-header>p {
   width: 17%;
 }
 
-.reporte{
+.reporte {
   display: flex;
   text-align: center;
   justify-content: center;
   width: 100%;
 }
 
-.reporte>p{
+.reporte>p {
   width: 17%;
 }
 
-.reporte>button{
+.reporte>.img-container {
+  width: 17%;
+}
+
+.reporte>button {
   width: 17%;
   border: none;
   background-color: transparent;
-  transition: all .3s ease ;
+  transition: all .3s ease;
   color: #fff;
 }
 
-.reporte>button:hover{
+.reporte>button:hover {
   background-color: #1C3152;
 }
 
 
-.reporte:nth-child(odd){
+.reporte:nth-child(odd) {
   background-color: #172943;
 }
 
-.reporte:nth-child(even){
+.reporte:nth-child(even) {
   background-color: #111D33;
 }
 
+/* Modal - Agregar Reporte */
+
+.modal-agregar-container {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.modal-agregar {
+  background-color: var(--DarkBlue);
+  color: #fff;
+  width: 100%;
+  max-width: 550px;
+  padding: 35px;
+  border-radius: 14px;
+  border: 1px solid #263c5d;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.45);
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-agregar label {
+  font-size: 15px;
+  color: #c6d5eb;
+  margin-top: 8px;
+}
+
+.modal-agregar>input[type="text"]{
+  padding: 5px 10px;
+  color: #fff;
+  border-radius: 10px;
+  border: none;
+  font-size: 16px;
+}
+
+.modal-agregar>select {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: var(--DarkerBlue);
+  border: 1px solid #304767;
+  border-radius: 7px;
+  padding: 12px 14px;
+  color: #fff;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.modal-agregar>input,
+.modal-agregar>select {
+  border-color: #4c83c5;
+  box-shadow: 0 0 0 3px rgba(76, 131, 197, 0.15);
+  background-color: #1C3152;
+}
+
+.modal-agregar>input[type="file"] {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: var(--DarkerBlue);
+  border-radius: 7px;
+  padding: 12px;
+  color: #aebfd6;
+  cursor: pointer;
+}
+
+.modal-agregar>input[type="file"]::file-selector-button {
+  background-color: var(--Blue);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  margin-right: 12px;
+  cursor: pointer;
+}
+
+
+.modal-agregar select {
+  cursor: pointer;
+}
+
+.modal-agregar select option {
+  background-color: var(--DarkBlue);
+  color: #fff;
+}
+
+.modal-agregar button {
+  margin-top: 18px;
+  padding: 13px;
+  background-color: var(--Blue);
+  color: #fff;
+  border: 1px solid #456184;
+  border-radius: 7px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.modal-agregar button {
+  background-color: #29466f;
+}
