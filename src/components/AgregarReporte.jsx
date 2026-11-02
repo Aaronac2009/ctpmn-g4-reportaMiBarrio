@@ -36,7 +36,7 @@ export default function AgregarReporte({ funcionAgregar, procesarImagen, funcion
 
                 <label htmlFor="Direccion">Imagen (Opcional)</label>
                 <input type="file" accept="image/*" onChange={(e) => manejarImagen(e)} />
-                <button className="boton-agregar" onClick={() => funcionAgregar(nuevoReporte)}>Agregar</button>
+                <button className="boton-agregar" onClick={() => {funcionAgregar(nuevoReporte); funcionCerrar()}}>Agregar</button>
             </div>
         </div>
     )

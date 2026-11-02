@@ -199,6 +199,9 @@ summary {
 
 .reporte>.img-container {
   width: 17%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .reporte>button {
