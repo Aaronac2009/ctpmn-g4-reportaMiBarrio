@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export default function AgregarReporte({ funcionAgregar, procesarImagen }) {
+export default function AgregarReporte({ funcionAgregar, procesarImagen, funcionCerrar }) {
     async function manejarImagen(e) {
         const imagen = await procesarImagen(e);
 
@@ -14,6 +14,7 @@ export default function AgregarReporte({ funcionAgregar, procesarImagen }) {
     return (
         <div className="modal-agregar-container">
             <div className="modal-agregar">
+                <button className="modal-cerrar" onClick={funcionCerrar}>X</button>
                 <label htmlFor="titulo">Titulo del Reporte</label>
                 <input type="text" value={nuevoReporte.titulo} onChange={(e) => setNuevoReporte({ ...nuevoReporte, titulo: e.target.value })} />
 
@@ -35,7 +36,7 @@ export default function AgregarReporte({ funcionAgregar, procesarImagen }) {
 
                 <label htmlFor="Direccion">Imagen (Opcional)</label>
                 <input type="file" accept="image/*" onChange={(e) => manejarImagen(e)} />
-                <button onClick={() => funcionAgregar(nuevoReporte)}>Agregar</button>
+                <button className="boton-agregar" onClick={() => funcionAgregar(nuevoReporte)}>Agregar</button>
             </div>
         </div>
     )

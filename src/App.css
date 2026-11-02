@@ -150,6 +150,22 @@ summary {
 
 /*Lista de reportes*/
 
+.boton-agregar{
+  background-color: #263c5d;
+  border: none;
+  margin: 20px 0 0 20px;
+  color: #fff;
+  padding: 13px 10px 13px 10px;
+  border-radius: 10px;
+  border: 1px solid #263c5d;
+  transition: all .3s ease;
+}
+
+.boton-agregar:hover{
+  border: 1px solid #5b87c8;
+  cursor: pointer;
+}
+
 .lista-reportes {
   display: grid;
   border-radius: 10px;
@@ -236,7 +252,7 @@ summary {
   overflow-y: auto;
 }
 
-.modal-agregar label {
+.modal-agregar>label {
   font-size: 15px;
   color: #c6d5eb;
   margin-top: 8px;
@@ -248,6 +264,7 @@ summary {
   border-radius: 10px;
   border: none;
   font-size: 16px;
+  border: 1px solid #6c9cdf;
 }
 
 .modal-agregar>select {
@@ -300,7 +317,7 @@ summary {
   color: #fff;
 }
 
-.modal-agregar button {
+.modal-agregar>.boton-agregar {
   margin-top: 18px;
   padding: 13px;
   background-color: var(--Blue);
@@ -310,8 +327,18 @@ summary {
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.2s ease, transform 0.2s ease;
+  margin-left: 0;
 }
 
-.modal-agregar button {
+.modal-agregar>.boton-agregar:hover {
   background-color: #29466f;
+}
+
+.modal-cerrar{
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  display: flex;
+  justify-content: end;
+  font-size: 18px;
 }

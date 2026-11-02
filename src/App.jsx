@@ -6,7 +6,7 @@ import ListaReportes from './components/ListaReportes'
 import AgregarReporte from './components/AgregarReporte'
 function App() {
   const [reportes, setReportes] = useState([])
-
+  const [mostrarModalAgregar, setMostrarModalAgregar] = useState(false)
 
   async function obtenerReportes(){
     console.log("Solicitud para obtener datos")
@@ -48,25 +48,26 @@ function App() {
   }
   
 
-function procesarImagen(e) {
-  const archivo = e.target.files[0];
+  function procesarImagen(e) {
+    const archivo = e.target.files[0];
 
-  if (!archivo) return Promise.resolve(null);
+    if (!archivo) return Promise.resolve(null);
 
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
 
-    reader.onload = () => {
-      resolve(reader.result);
-    };
+      reader.onload = () => {
+        resolve(reader.result);
+      };
 
-    reader.onerror = () => {
-      reject(reader.error);
-    };
+      reader.onerror = () => {
+        reject(reader.error);
+      };
 
-    reader.readAsDataURL(archivo);
-  });
-}
+      reader.readAsDataURL(archivo);
+    });
+  }
+
 
 
   useEffect(() => {
@@ -78,8 +79,10 @@ function procesarImagen(e) {
       <Navbar></Navbar>
       <div className="main">
         <SearchBar></SearchBar>
+        <button onClick={() => setMostrarModalAgregar(true)} className='boton-agregar'>Agregar un Reporte</button>
         <ListaReportes reportes={reportes}></ListaReportes>
-        <AgregarReporte funcionAgregar={agregarReporte} procesarImagen={procesarImagen} ></AgregarReporte>
+        {mostrarModalAgregar ? <AgregarReporte funcionAgregar={agregarReporte} procesarImagen={procesarImagen} funcionCerrar={() => setMostrarModalAgregar(false)} ></AgregarReporte> : null}
+
       </div>
     </div>
   )
