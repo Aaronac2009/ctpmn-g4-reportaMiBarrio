@@ -217,15 +217,17 @@ summary {
 }
 
 
-.reporte:nth-child(odd) {
+.grupo-reporte:nth-child(odd) {
   background-color: #172943;
 }
 
-.reporte:nth-child(even) {
+.grupo-reporte:nth-child(even) {
   background-color: #111D33;
 }
 
-/* Modal - Agregar Reporte */
+.fila-vistas { margin: 0; padding: 8px 16px; border-top: 1px solid #344762; }
+
+ /* Modal - Agregar Reporte */
 
 .modal-agregar-container {
   position: fixed;
@@ -352,4 +354,5 @@ summary {
 .visor img { display: block; width: min(66vw, calc(80dvh * var(--proporcion, 1))); height: auto; max-height: 80dvh; object-fit: contain; }
 .visor .cerrar-foto { position: absolute; top: 4px; right: 4px; width: 40px; height: 40px; border: 0; border-radius: 50%; background: #222; color: white; font-size: 26px; cursor: pointer; }
 .visor { min-width: 48px; min-height: 48px; }
+
 
