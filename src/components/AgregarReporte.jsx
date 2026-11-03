@@ -1,13 +1,37 @@
+import { optimizarImagen } from "../optimizarImagen"
 import { useState } from "react"
 
-export default function AgregarReporte({ funcionAgregar, procesarImagen, funcionCerrar }) {
+export default function AgregarReporte({ funcionAgregar, funcionCerrar }) {
+    const [ocupado, setOcupado] = useState(false)
+    const [error, setError] = useState("")
     async function manejarImagen(e) {
-        const imagen = await procesarImagen(e);
-
-        setNuevoReporte(reporte => ({
-            ...reporte,
-            imagen: imagen
-        }));
+        const input = e.target
+        const archivo = input.files[0]
+        setError("")
+        setNuevoReporte(r => ({ ...r, imagen: "" }))
+        if (!archivo) return
+        setOcupado(true)
+        try {
+            const imagen = await optimizarImagen(archivo)
+            setNuevoReporte(r => ({ ...r, imagen }))
+        } catch {
+            input.value = ""
+            setError("No se pudo leer la foto. Prueba con una imagen JPG o PNG.")
+        } finally {
+            setOcupado(false)
+        }
+    }
+    async function guardar() {
+        setOcupado(true)
+        setError("")
+        try {
+            await funcionAgregar(nuevoReporte)
+            funcionCerrar()
+        } catch {
+            setError("No se pudo guardar el reporte. Inténtalo de nuevo.")
+        } finally {
+            setOcupado(false)
+        }
     }
 
     const [nuevoReporte, setNuevoReporte] = useState({ titulo: "", categoria: "", descripcion: "", direccion: "", estado: "Por Completar", imagen: "", vistas: 0 })
@@ -35,8 +59,9 @@ export default function AgregarReporte({ funcionAgregar, procesarImagen, funcion
                 <input type="text" value={nuevoReporte.direccion} onChange={(e) => setNuevoReporte({ ...nuevoReporte, direccion: e.target.value })} />
 
                 <label htmlFor="Direccion">Imagen (Opcional)</label>
-                <input type="file" accept="image/*" onChange={(e) => manejarImagen(e)} />
-                <button className="boton-agregar" onClick={() => {funcionAgregar(nuevoReporte); funcionCerrar()}}>Agregar</button>
+                <input disabled={ocupado} type="file" accept="image/*" onChange={(e) => manejarImagen(e)} />
+                {error && <p role="alert">{error}</p>}
+                <button className="boton-agregar" disabled={ocupado} onClick={guardar}>{ocupado ? "Procesando…" : "Agregar"}</button>
             </div>
         </div>
     )
