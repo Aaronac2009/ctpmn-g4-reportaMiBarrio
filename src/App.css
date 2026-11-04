@@ -109,46 +109,42 @@ summary {
   width: 80%;
 }
 
-/* Main - SearchBar */
-
-.searchbar {
-  width: 100%;
-  height: 74px;
-  padding: 10px 0 10px 0;
-  background-color: var(--DarkBlue);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.searchbar>input {
-  width: 50%;
-  height: 40px;
-  background-color: var(--DarkerBlue);
-  border: none;
-  border-radius: 80px;
-  padding: 10px;
-  margin: 0px 30px;
+.panel-busqueda {
+  margin: clamp(12px, 2vw, 26px);
+  padding: clamp(16px, 3vw, 32px);
+  border: 1px solid #344762;
+  border-radius: 20px;
+  background: #111D33;
   color: #fff;
+  font-family: "Segoe UI", sans-serif;
 }
-
-.searchbar>input::placeholder {
-  color: rgb(83, 148, 178);
+.seccion-barrio { color: #fff; font-size: .7rem; letter-spacing: .14em; font-weight: 700; }
+.panel-busqueda h1 { margin: 5px 0 18px; font-size: clamp(1.5rem, 3vw, 2.25rem); }
+.searchbar { display: flex; gap: 6px; background: #172943; border: 1px solid #344762; border-radius: 12px; padding: 5px; }
+.searchbar input { color: #fff; background: transparent; flex: 1; min-width: 0; padding: 10px; border: 0; border-radius: 8px; font: inherit; }
+.searchbar-button { width: 44px; border: 0; border-radius: 8px; background: var(--Blue); cursor: pointer; }
+.searchbar-img { width: 19px; vertical-align: middle; }
+.filtros-reportes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 145px), 1fr)); gap: 14px; margin: 20px 0; }
+.filtros-reportes label { display: grid; gap: 6px; font-size: .85rem; font-weight: 600; }
+.filtros-reportes select, .filtros-reportes input {
+  width: 100%; min-width: 0; padding: 10px; border: 1px solid #344762;
+  border-radius: 8px; color: #fff; background: #172943; font: inherit;
 }
-
-.searchbar-button {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: var(--Blue);
-  border: none;
+.searchbar input::placeholder, .filtros-reportes input::placeholder { color: #acbfd0; }
+.panel-busqueda footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; border-top: 1px solid #344762; padding-top: 14px; font-size: .87rem; }
+.panel-busqueda footer button { color: #fff; background: transparent; border: 0; padding: 6px; cursor: pointer; font: inherit; }
+.panel-busqueda footer button:disabled { color: #a6b4c2; cursor: default; }
+.panel-busqueda :focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+.main > p[role="status"] { margin: 16px 20px; color: #fff; }
+@media (max-width: 640px) {
+  .app { flex-direction: column; }
+  .navbar, .main { width: 100%; }
+  .navbar { height: auto; }
+  .navbar .user, .navbar .options { display: inline-flex; width: auto; vertical-align: middle; }
+  .navbar .user-photo { display: none; }
+  .navbar .user-name, .navbar .options > button { font-size: .9rem; }
+  .navbar .options { flex-direction: row; gap: 10px; }
 }
-
-.searchbar-img {
-  width: 20px;
-}
-
-/*Lista de reportes*/
 
 .boton-agregar{
   background-color: #263c5d;
@@ -217,15 +213,17 @@ summary {
 }
 
 
-.reporte:nth-child(odd) {
+.grupo-reporte:nth-child(odd) {
   background-color: #172943;
 }
 
-.reporte:nth-child(even) {
+.grupo-reporte:nth-child(even) {
   background-color: #111D33;
 }
 
-/* Modal - Agregar Reporte */
+.fila-vistas { margin: 0; padding: 8px 16px; border-top: 1px solid #344762; }
+
+ /* Modal - Agregar Reporte */
 
 .modal-agregar-container {
   position: fixed;
@@ -346,6 +344,7 @@ summary {
   font-size: 18px;
 }
 
+/* Estadisticas */
 
 .estadisticas {
   padding: 30px;
@@ -436,3 +435,13 @@ summary {
   border-radius: 6px;
   transition: width 0.6s ease-out;
 }
+
+
+.miniatura { cursor: zoom-in; border: 0; background: transparent; }
+.visor { position: fixed; inset: 0; margin: auto; padding: 0; border: 0; background: #181818; border-radius: 8px; }
+.visor::backdrop { background: rgb(0 0 0 / 80%); }
+.visor { width: fit-content; overflow: hidden; }
+.visor img { display: block; width: min(66vw, calc(80dvh * var(--proporcion, 1))); height: auto; max-height: 80dvh; object-fit: contain; }
+.visor .cerrar-foto { position: absolute; top: 4px; right: 4px; width: 40px; height: 40px; border: 0; border-radius: 50%; background: #222; color: white; font-size: 26px; cursor: pointer; }
+.visor { min-width: 48px; min-height: 48px; }
+
