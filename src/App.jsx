@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import SearchBar from './components/SearchBar'
 import ListaReportes from './components/ListaReportes'
 import AgregarReporte from './components/AgregarReporte'
+import LoginForm from './components/login'
 function App() {
   const [reportes, setReportes] = useState([])
   const [mostrarModalAgregar, setMostrarModalAgregar] = useState(false)
@@ -73,6 +74,14 @@ function App() {
   useEffect(() => {
     obtenerReportes()
   }, [])
+
+  if(!localStorage.getItem("usuario")){
+    return(
+      <div className="app">
+        <LoginForm></LoginForm>
+      </div>
+    )
+  }
 
   return(
     <div className='app'>

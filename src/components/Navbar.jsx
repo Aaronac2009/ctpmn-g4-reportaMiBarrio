@@ -7,7 +7,7 @@ export default function Navbar(){
             <div className="user">
                 <img src={userPhotoGeneric} className="user-photo" alt="" />
                 <div className="user-name">
-                    <p>Usuario 1</p>
+                    <p>{localStorage.getItem("usuario").nombre}</p>
                     <details>
                         <summary></summary>
                         <div className="user-options">

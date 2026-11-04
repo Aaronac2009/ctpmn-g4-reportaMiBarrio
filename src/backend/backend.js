@@ -47,7 +47,7 @@ app.post("/API/login", (req, res) =>{
     console.log(email)
     const usuarioEncontrado = usuarios.find(usuario => usuario.email === email.toLowerCase() && usuario.password === password)
     if(!usuarioEncontrado){
-        return res.status(401).json({"message":"Credenciales incorrectos"})
+        return res.status(401).json({error:true, message:"Credenciales incorrectos"})
     }
 
     return res.json({"id":usuarioEncontrado.id,

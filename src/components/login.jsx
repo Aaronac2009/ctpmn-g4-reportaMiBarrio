@@ -1,9 +1,10 @@
-import { useState } from "react"
+import { use, useState } from "react"
 import logo from "../assets/Reporta Mi Barrio Logo.png"
 
 
 export default function LoginForm(){
     const [error, setError] = useState(false)
+    const [type, setType] = useState("login")
 
     async function login(e){
         e.preventDefault()
@@ -18,7 +19,7 @@ export default function LoginForm(){
             body: JSON.stringify({email: email, password: password})
         })
 
-        const datos = respuesta.json()
+        const datos = await respuesta.json()
         if (!respuesta.ok){
             setError("ERROR: "+ datos.message)
             return
@@ -27,18 +28,22 @@ export default function LoginForm(){
         localStorage.setItem("usuario", datos)
         window.location.reload()
     }
+
     return(
-        <div className="form-user">
-            <img src={logo} alt="" />
-            <form onSubmit={login}>
-                <label htmlFor="email">Correo Electronico</label>
-                <input type="email" name="email" id="email" placeholder="Coloca tu email aqui" />
-                <label htmlFor="password">Contraseña</label>
-                <input type="password" name="password" id="password"  placeholder="Usa una contraseña segura"/>
-                <button type="submit">Entrar</button>
-                {error ? <p className="error">{error}</p> : null}
-            </form>
+        <div className="form-user-container">
+            <div className="form-user">
+                <img src={logo} alt="" />
+                <form onSubmit={login} className="formulario">
+                    <label htmlFor="email">Correo Electronico</label>
+                    <input type="email" name="email" id="email" placeholder="Coloca tu email aqui" />
+                    <label htmlFor="password">Contraseña</label>
+                    <input type="password" name="password" id="password"  placeholder="Usa una contraseña segura"/>
+                    <button type="submit">Entrar</button>
+                    {error ? <p className="error">{error}</p> : null}
+                </form>
+            </div>
         </div>
+
     )
 }
 
