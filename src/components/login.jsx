@@ -56,14 +56,14 @@ export default function LoginForm(){
             <div className="form-user-container">
                 <div className="form-user">
                     <img src={logo} alt="" />
-                    <form onSubmit={login} className="formulario">
+                    <form key="login" onSubmit={login} className="formulario" id="form-login">
                         <label htmlFor="email">Correo Electronico</label>
                         <input type="email" name="email" id="email" placeholder="Coloca tu email aqui" />
                         <label htmlFor="password">Contraseña</label>
                         <input type="password" name="password" id="password"  placeholder="********"/>
                         <div className="create">
                             <p>No tienes una cuenta? </p>
-                            <button type="button" className="createAccount" onClick={() => setType("create")}>Crea Una</button>
+                            <button type="button" className="createAccount" onClick={() => {setType("create")}}>Crea Una</button>
                         </div>
                         <button type="submit">Entrar</button>
                         {error ? <p className="error">{error}</p> : null}
@@ -79,13 +79,13 @@ export default function LoginForm(){
             <div className="form-user-container">
                 <div className="form-user">
                     <img src={logo} alt="" />
-                    <form onSubmit={create} className="formulario">
-                        <label htmlFor="email">Nombre de Usuario</label>
-                        <input type="text" name="nombre" id="nombre" placeholder="John Doe..." />
+                    <form key="create" onSubmit={create} className="formulario" id="form-create">
+                        <label htmlFor="nombre">Nombre de Usuario</label>
+                        <input type="text" name="nombre"  placeholder="John Doe..."  />
                         <label htmlFor="email">Correo Electronico</label>
-                        <input type="email" name="email" id="email" placeholder="Coloca tu email aqui" />
+                        <input type="email" name="email"  placeholder="Coloca tu email aqui" />
                         <label htmlFor="password">Contraseña</label>
-                        <input type="password" name="password" id="password"  placeholder="Usa una contraseña segura"/>
+                        <input type="password" name="password" placeholder="Usa una contraseña segura" />
                         <div className="create">
                             <p>Ya tienes una cuenta? </p>
                             <button type="button" className="createAccount" onClick={() => setType("login")}>Inicia Sesion</button>
