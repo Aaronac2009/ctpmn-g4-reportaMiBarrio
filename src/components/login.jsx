@@ -11,8 +11,6 @@ export default function LoginForm(){
         const formdata = new FormData(e.target)
         const email = formdata.get("email")
         const password = formdata.get("password")
-
-        console.log("email: " + email)
         const respuesta = await fetch("http://localhost:3000/API/login", {
             method:"POST",
             headers:{"Content-Type":"application/json"},
@@ -25,25 +23,81 @@ export default function LoginForm(){
             return
         }
 
-        localStorage.setItem("usuario", datos)
+        localStorage.setItem("usuario", JSON.stringify(datos))
         window.location.reload()
     }
 
-    return(
-        <div className="form-user-container">
-            <div className="form-user">
-                <img src={logo} alt="" />
-                <form onSubmit={login} className="formulario">
-                    <label htmlFor="email">Correo Electronico</label>
-                    <input type="email" name="email" id="email" placeholder="Coloca tu email aqui" />
-                    <label htmlFor="password">Contraseña</label>
-                    <input type="password" name="password" id="password"  placeholder="Usa una contraseña segura"/>
-                    <button type="submit">Entrar</button>
-                    {error ? <p className="error">{error}</p> : null}
-                </form>
-            </div>
-        </div>
+    async function create(e) {
+        e.preventDefault()
+        const formdata = new FormData(e.target)
+        const nombre = formdata.get("nombre")
+        const email = formdata.get("email").toLowerCase()
+        const password = formdata.get("password")
 
-    )
+        const respuesta = await fetch("http://localhost:3000/API/login/create", {
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body: JSON.stringify({nombre: nombre, email: email, password: password})
+        })
+        const datos = await respuesta.json()
+
+        if(!respuesta.ok){
+            setError("ERROR: "+ datos.message)
+            return
+        }
+
+        localStorage.setItem("usuario", JSON.stringify(datos))
+        window.location.reload()
+    }
+
+    // formulario login
+    if (type === "login"){
+        return(
+            <div className="form-user-container">
+                <div className="form-user">
+                    <img src={logo} alt="" />
+                    <form onSubmit={login} className="formulario">
+                        <label htmlFor="email">Correo Electronico</label>
+                        <input type="email" name="email" id="email" placeholder="Coloca tu email aqui" />
+                        <label htmlFor="password">Contraseña</label>
+                        <input type="password" name="password" id="password"  placeholder="********"/>
+                        <div className="create">
+                            <p>No tienes una cuenta? </p>
+                            <button className="createAccount" onClick={() => setType("create")}>Crea Una</button>
+                        </div>
+                        <button type="submit">Entrar</button>
+                        {error ? <p className="error">{error}</p> : null}
+
+                    </form>
+                </div>
+            </div>
+        )
+    }
+
+    if(type === "create"){
+        return(
+            <div className="form-user-container">
+                <div className="form-user">
+                    <img src={logo} alt="" />
+                    <form onSubmit={create} className="formulario">
+                        <label htmlFor="email">Nombre de Usuario</label>
+                        <input type="text" name="nombre" id="nombre" placeholder="John Doe..." />
+                        <label htmlFor="email">Correo Electronico</label>
+                        <input type="email" name="email" id="email" placeholder="Coloca tu email aqui" />
+                        <label htmlFor="password">Contraseña</label>
+                        <input type="password" name="password" id="password"  placeholder="Usa una contraseña segura"/>
+                        <div className="create">
+                            <p>Ya tienes una cuenta? </p>
+                            <button className="createAccount" onClick={() => setType("login")}>Inicia Sesion</button>
+                        </div>
+                        <button type="submit">Crear cuenta</button>
+                        {error ? <p className="error">{error}</p> : null}
+
+                    </form>
+                </div>
+            </div>
+        )
+    }
+
 }
 

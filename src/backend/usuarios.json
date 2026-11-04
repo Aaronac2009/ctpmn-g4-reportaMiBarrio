@@ -1,7 +1,16 @@
-[{
-    "id":0,
-    "nombre":"Aaron Aguero",
-    "email":"aaroncastillo009@gmail.com",
+[
+  {
+    "id": 0,
+    "nombre": "Aaron Aguero",
+    "email": "aaroncastillo009@gmail.com",
     "rol": "admin",
     "password": "aaron2009"
-}]
+  },
+  {
+    "id": 1,
+    "nombre": "Steven Garita",
+    "email": "stevengarita64@gmail.com",
+    "rol": "user",
+    "password": "stevenselacome"
+  }
+]

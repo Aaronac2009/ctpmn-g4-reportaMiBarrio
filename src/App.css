@@ -25,7 +25,7 @@
   display: flex;
   width: 100%;
   align-items: center;
-  margin-top: 20px;
+  margin: 40px 0 0 0 ;
 }
 
 .user-photo {
@@ -37,7 +37,7 @@
 .user-name {
   display: flex;
   justify-content: center;
-  font-size: 24px;
+  font-size: 20px;
   align-items: center;
 }
 
@@ -82,7 +82,7 @@ summary {
 }
 
 .options {
-  margin-top: 30px;
+  margin-top: 60px;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -114,7 +114,7 @@ summary {
 /*Main*/
 
 .main {
-  width: 80%;
+  width: 100%;
 }
 
 /* Main - SearchBar */
@@ -425,4 +425,16 @@ summary {
 
 .error{
   color: red;
+}
+
+.create{
+  display: flex;
+}
+
+.createAccount{
+  border: none;
+  background-color: transparent;
+  color: #4483e8;
+  font-size: 14px;
+  cursor: pointer;
 }
