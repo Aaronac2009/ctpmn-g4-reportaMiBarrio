@@ -7,7 +7,6 @@ import AgregarReporte from './components/AgregarReporte'
 import LoginForm from './components/login'
 function App() {
 
-
   const [reportes, setReportes] = useState([])
   const [mostrarModalAgregar, setMostrarModalAgregar] = useState(false)
 

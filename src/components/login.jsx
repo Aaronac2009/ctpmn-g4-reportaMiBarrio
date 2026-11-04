@@ -63,7 +63,7 @@ export default function LoginForm(){
                         <input type="password" name="password" id="password"  placeholder="********"/>
                         <div className="create">
                             <p>No tienes una cuenta? </p>
-                            <button className="createAccount" onClick={() => setType("create")}>Crea Una</button>
+                            <button type="button" className="createAccount" onClick={() => setType("create")}>Crea Una</button>
                         </div>
                         <button type="submit">Entrar</button>
                         {error ? <p className="error">{error}</p> : null}
@@ -88,7 +88,7 @@ export default function LoginForm(){
                         <input type="password" name="password" id="password"  placeholder="Usa una contraseña segura"/>
                         <div className="create">
                             <p>Ya tienes una cuenta? </p>
-                            <button className="createAccount" onClick={() => setType("login")}>Inicia Sesion</button>
+                            <button type="button" className="createAccount" onClick={() => setType("login")}>Inicia Sesion</button>
                         </div>
                         <button type="submit">Crear cuenta</button>
                         {error ? <p className="error">{error}</p> : null}

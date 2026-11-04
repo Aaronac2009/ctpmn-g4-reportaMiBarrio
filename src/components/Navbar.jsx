@@ -11,7 +11,6 @@ export default function Navbar(){
                     <details>
                         <summary></summary>
                         <div className="user-options">
-                            <button>Modo Administrador</button>
                             <button>Cerrar Session</button>
                         </div>
                     </details>
