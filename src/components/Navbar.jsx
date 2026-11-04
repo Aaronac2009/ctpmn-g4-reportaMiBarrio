@@ -11,7 +11,7 @@ export default function Navbar(){
                     <details>
                         <summary></summary>
                         <div className="user-options">
-                            <button>Cerrar Session</button>
+                            <button onClick={() => {localStorage.removeItem("usuario"); window.location.reload()}}>Cerrar Session</button>
                         </div>
                     </details>
                 </div>
