@@ -1,4 +1,4 @@
-import { optimizarImagen } from "../optimizarImagen"
+import { optimizarImagen } from "../backend/optimizarImagen"
 import { useState } from "react"
 
 export default function AgregarReporte({ funcionAgregar, funcionCerrar }) {
