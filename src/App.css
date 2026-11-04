@@ -436,6 +436,7 @@ summary {
   transition: width 0.6s ease-out;
 }
 
+/* Visor de imagenes */
 
 .miniatura { cursor: zoom-in; border: 0; background: transparent; }
 .visor { position: fixed; inset: 0; margin: auto; padding: 0; border: 0; background: #181818; border-radius: 8px; }
