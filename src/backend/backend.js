@@ -14,6 +14,7 @@ const archivoReportes = path.join(dirname, "reportes.json")
 const archivoUsuarios = path.join(dirname, "usuarios.json")
 
 const reportes =  JSON.parse(await readFile(archivoReportes, "utf-8"))
+const usuarios = JSON.parse(await readFile(archivoUsuarios, "utf-8"))
 
 async function guardarArchivo(informacion, archivo){
     await writeFile(archivo, JSON.stringify(informacion, null, 2), "utf-8")
@@ -38,6 +39,21 @@ app.post("/API", async (req, res) => {
     await guardarArchivo(reportes, archivoReportes)
     console.log("Se guardo el nuevo reporte")
     res.status(201).json(reportes)
+})
+
+app.post("/API/login", (req, res) =>{
+    console.log("Solicitud para iniciar sesion")
+    const {email, password} = req.body
+    console.log(email)
+    const usuarioEncontrado = usuarios.find(usuario => usuario.email === email.toLowerCase() && usuario.password === password)
+    if(!usuarioEncontrado){
+        return res.status(401).json({"message":"Credenciales incorrectos"})
+    }
+
+    return res.json({"id":usuarioEncontrado.id,
+        "nombre":usuarioEncontrado.nombre,
+        "rol":usuarioEncontrado.rol})
+
 })
 
 app.listen(3000, () => {
