@@ -97,8 +97,7 @@ function App() {
         {vista === "menu" ? (
           <>
             <section className="panel-busqueda" aria-labelledby="titulo-busqueda">
-              <header><span className="seccion-barrio">REPORTES DE LA COMUNIDAD</span>
-                <h1 id="titulo-busqueda">Explora tu barrio</h1>
+              <header>
               </header>
               <SearchBar onBuscar={setConsulta} />
               <div className="filtros-reportes" role="group" aria-label="Filtros de búsqueda">
