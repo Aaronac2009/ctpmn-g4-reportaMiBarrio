@@ -96,10 +96,21 @@ function App() {
   }
 
   async function confirmarVista(id) {
-    const respuesta = await fetch(`${API}/${id}/vistas`, { method: "POST" })
+    const usuario = JSON.parse(localStorage.getItem("usuario") || "null")
+    const respuesta = await fetch(`${API}/${id}/vistas`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ usuarioId: usuario?.id })
+    })
     if (!respuesta.ok) throw new Error("No se pudo registrar la confirmacion")
-    const { vistas } = await respuesta.json()
-    setReportes(lista => lista.map(r => r.id === id ? { ...r, vistas: Math.max(r.vistas || 0, vistas) } : r))
+    const { vistas, votantes, yaVoto } = await respuesta.json()
+    setReportes(lista => lista.map(r => r.id === id ? {
+      ...r,
+      vistas: Math.max(r.vistas || 0, vistas || 0),
+      votantes: Array.isArray(votantes) ? votantes.map(String) : (r.votantes || []),
+      yaVoto
+    } : r))
+    return yaVoto
   }
 
   return (

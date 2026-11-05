@@ -237,8 +237,6 @@ summary {
   background-color: #111D33;
 }
 
-.fila-vistas { margin: 0; padding: 8px 16px; border-top: 1px solid #344762; }
-
 .boton-visto {
     display: inline-flex;
     align-items: center;
@@ -255,6 +253,16 @@ summary {
 
 .boton-visto:hover {
     background-color: #2a4a7f;
+}
+
+.boton-visto:disabled {
+    cursor: default;
+    opacity: .75;
+}
+
+.boton-visto-votado {
+    background-color: #2e7d32;
+    border-color: #2e7d32;
 }
 
 .boton-visto-activo {

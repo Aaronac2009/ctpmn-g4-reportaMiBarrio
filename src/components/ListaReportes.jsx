@@ -3,6 +3,9 @@ import { useRef, useState } from "react"
 export default function ListaReportes({ reportes, confirmarVista, eliminarReporte }) {
     const [errores, setErrores] = useState({})
     const [presionados, setPresionados] = useState({})
+    const usuarioActual = (() => {
+        try { return JSON.parse(localStorage.getItem("usuario") || "null") } catch { return null }
+    })()
     const reportesOrdenados = [...reportes].sort((a, b) =>
         (Number(b?.vistas) || 0) - (Number(a?.vistas) || 0)
     )
@@ -42,17 +45,23 @@ export default function ListaReportes({ reportes, confirmarVista, eliminarReport
                     <p>{reporte.categoria}</p>
                     <p>{reporte.descripcion}</p>
                     <p>{reporte.direccion}</p>
-                    <button
-                        type="button"
-                        className={`boton-visto ${presionados[reporte.id] ? "boton-visto-activo" : ""}`}
-                        onClick={() => marcar(reporte.id)}
-                        aria-label={`Confirmar que viste ${reporte.titulo}`}
-                    >
-                        Sí
-                        <span className="contador-vistas" aria-label={`Visto ${reporte.vistas || 0} veces`}>
-                            {reporte.vistas || 0}
-                        </span>
-                    </button>
+                    {(() => {
+                        const yaVoto = (reporte.votantes || []).map(String).includes(String(usuarioActual?.id))
+                        return (
+                            <button
+                                type="button"
+                                disabled={yaVoto}
+                                className={`boton-visto ${presionados[reporte.id] ? "boton-visto-activo" : ""} ${yaVoto ? "boton-visto-votado" : ""}`}
+                                onClick={() => { if (!yaVoto) marcar(reporte.id) }}
+                                aria-label={yaVoto ? `Ya confirmaste que viste ${reporte.titulo}` : `Confirmar que viste ${reporte.titulo}`}
+                            >
+                                {yaVoto ? "Ya votaste" : "Sí"}
+                                <span className="contador-vistas" aria-label={`Visto ${reporte.vistas || 0} veces`}>
+                                    {reporte.vistas || 0}
+                                </span>
+                            </button>
+                        )
+                    })()}
                     {reporte.imagen ? <div className="img-container">
                         <button className="miniatura" aria-label={`Ampliar foto de ${reporte.titulo}`} onClick={() => {
                             setFoto(reporte)
@@ -61,7 +70,6 @@ export default function ListaReportes({ reportes, confirmarVista, eliminarReport
                     </div> : <p>No</p>}
                     <button onClick={() => eliminar(reporte)}>Eliminar</button>
                 </div>
-                    <div aria-live="polite">{reporte.vistas > 0 && <p className="fila-vistas">Lo vieron: {reporte.vistas}</p>}</div>
                     {errores[reporte.id] && <p role="alert">{errores[reporte.id]}</p>}
                 </div>
             ))}
