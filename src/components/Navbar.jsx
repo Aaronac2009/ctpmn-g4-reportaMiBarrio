@@ -7,12 +7,11 @@ export default function Navbar({ vista, onCambiarVista }){
             <div className="user">
                 <img src={userPhotoGeneric} className="user-photo" alt="" />
                 <div className="user-name">
-                    <p>Usuario 1</p>
+                    <p>{JSON.parse(localStorage.getItem("usuario")).nombre}</p>
                     <details>
                         <summary></summary>
                         <div className="user-options">
-                            <button>Modo Administrador</button>
-                            <button>Cerrar Session</button>
+                            <button onClick={() => {localStorage.removeItem("usuario"); window.location.reload()}}>Cerrar Sesión</button>
                         </div>
                     </details>
                 </div>

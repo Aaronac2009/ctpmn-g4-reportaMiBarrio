@@ -1,1 +1,30 @@
-[]
+[
+  {
+    "id": 0,
+    "nombre": "Aaron Aguero",
+    "email": "aaroncastillo009@gmail.com",
+    "rol": "admin",
+    "password": "aaron2009"
+  },
+  {
+    "id": 1,
+    "nombre": "Steven Garita",
+    "email": "stevengarita64@gmail.com",
+    "rol": "user",
+    "password": "stevenselacome"
+  },
+  {
+    "id": 2,
+    "nombre": "Francela",
+    "email": "francastillo84@gmail.com",
+    "rol": "user",
+    "password": "momoa"
+  },
+  {
+    "id": 3,
+    "nombre": "aaa",
+    "email": "aaronaguero2205@gmail.com",
+    "rol": "user",
+    "password": "aaa"
+  }
+]

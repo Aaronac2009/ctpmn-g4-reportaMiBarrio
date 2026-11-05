@@ -5,6 +5,7 @@ import SearchBar from './components/Searchbar'
 import ListaReportes from './components/ListaReportes'
 import AgregarReporte from './components/AgregarReporte'
 import Estadisticas from './components/Estadisticas'
+import LoginForm from './components/login'
 
 const API = "http://localhost:3001/API"
 
@@ -13,11 +14,37 @@ function normalizar(texto = "") {
 }
 
 function App() {
+  const hayUsuario = Boolean(localStorage.getItem("usuario"))
   const [reportes, setReportes] = useState([])
   const [consulta, setConsulta] = useState("")
   const [filtros, setFiltros] = useState({})
   const [mostrarModalAgregar, setMostrarModalAgregar] = useState(false)
   const [vista, setVista] = useState("menu")
+
+  useEffect(() => {
+    if (!hayUsuario) return
+    let activo = true
+    fetch(API)
+      .then(respuesta => {
+        if (!respuesta.ok) throw new Error("El servidor no logro obtener los datos")
+        return respuesta.json()
+      })
+      .then(datos => {
+        if (activo) setReportes(datos)
+      })
+      .catch(error => {
+        console.log("Ocurrio un error inesperado", error)
+      })
+    return () => { activo = false }
+  }, [hayUsuario])
+
+  if (!hayUsuario) {
+    return (
+      <div className="app">
+        <LoginForm />
+      </div>
+    )
+  }
 
   function cambiarFiltro(campo, valor) {
     setFiltros(actual => ({ ...actual, [campo]: valor }))
@@ -28,9 +55,9 @@ function App() {
       .map(valor => [valor, valor])
   }
   const campos = [
-    ["categoria", "Categoría", opciones("categoria")],
+    ["categoria", "Categoria", opciones("categoria")],
     ["estado", "Estado", opciones("estado")],
-    ["foto", "Fotografía", [["con", "Con foto"], ["sin", "Sin foto"]]],
+    ["foto", "Fotografia", [["con", "Con foto"], ["sin", "Sin foto"]]],
     ["vistas", "Confirmaciones", [["con", "Con confirmaciones"], ["sin", "Sin confirmaciones"]]]
   ]
   const termino = normalizar(consulta)
@@ -42,22 +69,6 @@ function App() {
     normalizar(r.direccion).includes(normalizar(filtros.direccion).trim()) &&
     (!termino || [r.titulo, r.categoria, r.descripcion, r.direccion].some(campo => normalizar(campo).includes(termino)))
   )
-
-  useEffect(() => {
-    let activo = true
-    fetch(API)
-      .then(respuesta => {
-        if (!respuesta.ok) throw new Error("El servidor no logró obtener los datos")
-        return respuesta.json()
-      })
-      .then(datos => {
-        if (activo) setReportes(datos)
-      })
-      .catch(error => {
-        console.log("Ocurrio un error inesperado", error)
-      })
-    return () => { activo = false }
-  }, [])
 
   async function agregarReporte(reporte) {
     try {
@@ -84,7 +95,7 @@ function App() {
 
   async function confirmarVista(id) {
     const respuesta = await fetch(`${API}/${id}/vistas`, { method: "POST" })
-    if (!respuesta.ok) throw new Error("No se pudo registrar la confirmación")
+    if (!respuesta.ok) throw new Error("No se pudo registrar la confirmacion")
     const { vistas } = await respuesta.json()
     setReportes(lista => lista.map(r => r.id === id ? { ...r, vistas: Math.max(r.vistas || 0, vistas) } : r))
   }
@@ -100,7 +111,7 @@ function App() {
               <header>
               </header>
               <SearchBar onBuscar={setConsulta} />
-              <div className="filtros-reportes" role="group" aria-label="Filtros de búsqueda">
+              <div className="filtros-reportes" role="group" aria-label="Filtros de busqueda">
                 {campos.map(([campo, etiqueta, valores]) => (
                   <label key={campo}>{etiqueta}
                     <select value={filtros[campo] || ""} onChange={e => cambiarFiltro(campo, e.target.value)}>
@@ -109,7 +120,7 @@ function App() {
                     </select>
                   </label>
                 ))}
-                <label>Dirección<input type="search" placeholder="Barrio o calle" value={filtros.direccion || ""}
+                <label>Direccion<input type="search" placeholder="Barrio o calle" value={filtros.direccion || ""}
                   onChange={e => cambiarFiltro("direccion", e.target.value)} /></label>
               </div>
               <footer><span role="status">{resultados.length} de {reportes.length} reportes</span>
@@ -118,7 +129,7 @@ function App() {
             </section>
             <button onClick={() => setMostrarModalAgregar(true)} className='boton-agregar'>Agregar un Reporte</button>
             <ListaReportes reportes={resultados} confirmarVista={confirmarVista} eliminarReporte={eliminarReporte} />
-            {(consulta || Object.values(filtros).some(Boolean)) && resultados.length === 0 && <p role="status">Ningún reporte coincide con tu búsqueda.</p>}
+            {(consulta || Object.values(filtros).some(Boolean)) && resultados.length === 0 && <p role="status">Ningun reporte coincide con tu busqueda.</p>}
             {mostrarModalAgregar && (
               <AgregarReporte
                 funcionAgregar={agregarReporte}
