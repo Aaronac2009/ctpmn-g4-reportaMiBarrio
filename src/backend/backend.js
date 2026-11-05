@@ -117,11 +117,10 @@ app.patch("/API/:id/:estado", async (req, res) =>{
     console.log("Se socilicto cambiar el estado de un elemento")
     const id = req.params.id
     console.log("La id a editar es: "+ id)
-    
+    const estado = req.params.estado
     const reporteID = reportes.findIndex(reporte => reporte.id === id)
     if(reporteID !== -1){
         await actualizarReportes(reportes => reportes.map(reporte => reporte.id === id ? {...reporte, estado:estado} :  reporte))
-        await guardarArchivo(reportes, archivoReportes);
         return res.json(reportes)
     }
     console.log("No se encontro la id deseada")
@@ -144,6 +143,21 @@ app.delete("/API/users/:id", async (req, res) =>{
     usuarios = usuarios.filter(usuario => usuario.id !== id)
     await guardarArchivo(usuarios, archivoUsuarios)
     return res.json(usuarios)
+})
+
+app.patch("/API/users/:id/:rol", async (req, res) =>{
+    console.log("Se socilicto cambiar el rol de un elemento")
+    const id = parseInt(req.params.id)
+    console.log("La id a editar es: "+ id)
+    const rol = req.params.rol
+    const usuarioID = usuarios.findIndex(usuario => usuario.id === id)
+    if(usuarioID !== -1){
+        usuarios = usuarios.map(usuario => usuario.id === id ? {...usuario, rol:rol} :  usuario)
+        await guardarArchivo(usuarios, archivoUsuarios);
+        return res.json(usuarios)
+    }
+    console.log("No se encontro la id deseada")
+    return res.status(404).json({message:"Error al cambiar el estado del usuario"})
 })
 
 app.listen(3001, () => {

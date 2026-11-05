@@ -59,7 +59,6 @@ export default function ListaReportes({ reportes, confirmarVista, eliminarReport
                         }}><img src={reporte.imagen} width="50" loading="lazy" alt="" /></button>
                     </div> : <p>No</p>}
                     {esAdmin ? <select value={reporte.estado} onChange={(e) => cambiarEstado(e, reporte.id)}>
-                        <option value="" disabled>Cambiar Estado</option>
                         <option value="pendiente">Pendiente</option>
                         <option value="en proceso">En Proceso</option>
                         <option value="completado">Completado</option>

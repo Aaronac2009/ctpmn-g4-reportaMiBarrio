@@ -125,6 +125,12 @@ function App() {
     setUsuarios(datos)
   }
 
+  async function cambiarRolUsuario(id, rol, setUsuarios) {
+    const respuesta = await fetch(`${API}/users/${id}/${rol}`, {method:"PATCH"})
+    if (!respuesta.ok) throw new Error("No se pudo obtener la lista de usuarios")
+    const datos = await respuesta.json()
+    setUsuarios(datos)
+  }
 
   return (
     <div className='app'>
@@ -165,7 +171,7 @@ function App() {
           </>
         ) : vista === "estadisticas" ?(
           <Estadisticas reportes={reportes} />
-        ): (<AdminUsuarios obtenerUsuarios={obtenerUsuarios} eliminarUsuario={eliminarUsuario}></AdminUsuarios>)}
+        ): (<AdminUsuarios obtenerUsuarios={obtenerUsuarios} eliminarUsuario={eliminarUsuario} cambiarRol={cambiarRolUsuario}></AdminUsuarios>)}
       </div>
     </div>
   )
