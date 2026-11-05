@@ -2,12 +2,22 @@ import { useRef, useState } from "react"
 
 export default function ListaReportes({ reportes, confirmarVista, eliminarReporte }) {
     const [errores, setErrores] = useState({})
+    const [presionados, setPresionados] = useState({})
+    const reportesOrdenados = [...reportes].sort((a, b) =>
+        (Number(b?.vistas) || 0) - (Number(a?.vistas) || 0)
+    )
+
     async function marcar(id) {
+        setPresionados(actual => ({ ...actual, [id]: true }))
         try {
             await confirmarVista(id)
             setErrores(actual => ({ ...actual, [id]: false }))
         } catch {
             setErrores(actual => ({ ...actual, [id]: "No se pudo guardar. Pulsa Sí para reintentar." }))
+        } finally {
+            window.setTimeout(() => {
+                setPresionados(actual => ({ ...actual, [id]: false }))
+            }, 700)
         }
     }
     async function eliminar(reporte) {
@@ -25,14 +35,24 @@ export default function ListaReportes({ reportes, confirmarVista, eliminarReport
             <div className="lista-reportes-header">
                 {["Titulo", "Categoria", "Descripcion", "Direccion", "Lo viste?", "Imagen", "Acciones"].map(texto => <p key={texto}>{texto}</p>)}
             </div>
-            {reportes.map(reporte => (
+            {reportesOrdenados.map(reporte => (
                 <div className="grupo-reporte" key={reporte.id}>
                 <div className="reporte">
                     <p>{reporte.titulo}</p>
                     <p>{reporte.categoria}</p>
                     <p>{reporte.descripcion}</p>
                     <p>{reporte.direccion}</p>
-                    <button onClick={() => marcar(reporte.id)}>Sí</button>
+                    <button
+                        type="button"
+                        className={`boton-visto ${presionados[reporte.id] ? "boton-visto-activo" : ""}`}
+                        onClick={() => marcar(reporte.id)}
+                        aria-label={`Confirmar que viste ${reporte.titulo}`}
+                    >
+                        Sí
+                        <span className="contador-vistas" aria-label={`Visto ${reporte.vistas || 0} veces`}>
+                            {reporte.vistas || 0}
+                        </span>
+                    </button>
                     {reporte.imagen ? <div className="img-container">
                         <button className="miniatura" aria-label={`Ampliar foto de ${reporte.titulo}`} onClick={() => {
                             setFoto(reporte)

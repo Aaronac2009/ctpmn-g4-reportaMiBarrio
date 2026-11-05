@@ -239,6 +239,45 @@ summary {
 
 .fila-vistas { margin: 0; padding: 8px 16px; border-top: 1px solid #344762; }
 
+.boton-visto {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border: 1px solid #344762;
+    border-radius: 999px;
+    background-color: #1C3152;
+    color: #fff;
+    cursor: pointer;
+    transition: transform .15s ease, background-color .2s ease, box-shadow .2s ease;
+}
+
+.boton-visto:hover {
+    background-color: #2a4a7f;
+}
+
+.boton-visto-activo {
+    background-color: #4c83c5;
+    box-shadow: 0 0 0 4px rgba(76, 131, 197, .35);
+    animation: pulso-visto .6s ease;
+}
+
+@keyframes pulso-visto {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.contador-vistas {
+    min-width: 22px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background-color: rgba(255, 255, 255, .18);
+    font-size: .85rem;
+    font-weight: 700;
+}
+
  /* Modal - Agregar Reporte */
 
 .modal-agregar-container {

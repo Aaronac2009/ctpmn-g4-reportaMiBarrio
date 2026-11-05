@@ -61,7 +61,8 @@ function App() {
     ["vistas", "Confirmaciones", [["con", "Con confirmaciones"], ["sin", "Sin confirmaciones"]]]
   ]
   const termino = normalizar(consulta)
-  const resultados = reportes.filter(r =>
+  const resultados = reportes
+  .filter(r =>
     (!filtros.categoria || r.categoria === filtros.categoria) &&
     (!filtros.estado || r.estado === filtros.estado) &&
     (!filtros.foto || Boolean(r.imagen) === (filtros.foto === "con")) &&
@@ -69,6 +70,7 @@ function App() {
     normalizar(r.direccion).includes(normalizar(filtros.direccion).trim()) &&
     (!termino || [r.titulo, r.categoria, r.descripcion, r.direccion].some(campo => normalizar(campo).includes(termino)))
   )
+  .sort((a, b) => (Number(b?.vistas) || 0) - (Number(a?.vistas) || 0))
 
   async function agregarReporte(reporte) {
     try {
