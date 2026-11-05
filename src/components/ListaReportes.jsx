@@ -1,7 +1,8 @@
 import { useRef, useState } from "react"
 
-export default function ListaReportes({ reportes, confirmarVista, eliminarReporte }) {
+export default function ListaReportes({ reportes, confirmarVista, eliminarReporte, cambiarEstadoReporte }) {
     const [errores, setErrores] = useState({})
+    const esAdmin = JSON.parse(localStorage.getItem("usuario")).rol === "admin"
     async function marcar(id) {
         try {
             await confirmarVista(id)
@@ -18,12 +19,30 @@ export default function ListaReportes({ reportes, confirmarVista, eliminarReport
             setErrores(actual => ({ ...actual, [reporte.id]: "No se pudo eliminar el reporte. Inténtalo de nuevo." }))
         }
     }
+
+    async function cambiarEstado(event, id) {
+        if (event.target.value === "completado"){
+            if(!window.confirm("Seguro de que desea completar este reporte? Eliminara el reporte de la lista")){
+                return
+            }
+        }
+        cambiarEstadoReporte(id, event.target.value)
+        if (event.target.value === "completado") eliminarReporte(id)
+    }
+
     const visor = useRef(null)
     const [foto, setFoto] = useState(null)
     return (
         <div className="lista-reportes">
             <div className="lista-reportes-header">
-                {["Titulo", "Categoria", "Descripcion", "Direccion", "Lo viste?", "Imagen", "Acciones"].map(texto => <p key={texto}>{texto}</p>)}
+                <p>Titulo</p>
+                <p>Categoria</p>
+                <p>Descripcion</p>
+                <p>Direccion</p>
+                {esAdmin ? null : <p>Lo viste?</p>}
+                <p>Imagen</p>
+                {esAdmin ? <p>Estado</p> : null}
+                <p>Accion</p>
             </div>
             {reportes.map(reporte => (
                 <div className="grupo-reporte" key={reporte.id}>
@@ -32,13 +51,19 @@ export default function ListaReportes({ reportes, confirmarVista, eliminarReport
                     <p>{reporte.categoria}</p>
                     <p>{reporte.descripcion}</p>
                     <p>{reporte.direccion}</p>
-                    <button onClick={() => marcar(reporte.id)}>Sí</button>
+                    {esAdmin ? null : <button onClick={() => marcar(reporte.id)}>Sí</button>}
                     {reporte.imagen ? <div className="img-container">
                         <button className="miniatura" aria-label={`Ampliar foto de ${reporte.titulo}`} onClick={() => {
                             setFoto(reporte)
                             visor.current.showModal()
                         }}><img src={reporte.imagen} width="50" loading="lazy" alt="" /></button>
                     </div> : <p>No</p>}
+                    {esAdmin ? <select value={reporte.estado} onChange={(e) => cambiarEstado(e, reporte.id)}>
+                        <option value="" disabled>Cambiar Estado</option>
+                        <option value="pendiente">Pendiente</option>
+                        <option value="en proceso">En Proceso</option>
+                        <option value="completado">Completado</option>
+                    </select> : null}
                     <button onClick={() => eliminar(reporte)}>Eliminar</button>
                 </div>
                     <div aria-live="polite">{reporte.vistas > 0 && <p className="fila-vistas">Lo vieron: {reporte.vistas}</p>}</div>

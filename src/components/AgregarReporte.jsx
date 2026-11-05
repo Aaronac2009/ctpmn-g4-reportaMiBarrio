@@ -34,7 +34,7 @@ export default function AgregarReporte({ funcionAgregar, funcionCerrar }) {
         }
     }
 
-    const [nuevoReporte, setNuevoReporte] = useState({ titulo: "", categoria: "", descripcion: "", direccion: "", estado: "Por Completar", imagen: "", vistas: 0 })
+    const [nuevoReporte, setNuevoReporte] = useState({ titulo: "", categoria: "", descripcion: "", direccion: "", estado: "pendiente", imagen: "", vistas: 0 })
     return (
         <div className="modal-agregar-container">
             <div className="modal-agregar">

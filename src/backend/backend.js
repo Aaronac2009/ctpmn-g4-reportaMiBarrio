@@ -113,6 +113,21 @@ app.post("/API/login/create", async (req, res) => {
     return res.status(201).json({ id: id, nombre: nombre, rol: rol })
 })
 
+app.patch("/API/:id/:estado", async (req, res) =>{
+    console.log("Se socilicto cambiar el estado de un elemento")
+    const id = req.params.id
+    console.log("La id a editar es: "+ id)
+    
+    const reporteID = reportes.findIndex(reporte => reporte.id === id)
+    if(reporteID !== -1){
+        await actualizarReportes(reportes => reportes.map(reporte => reporte.id === id ? {...reporte, estado:estado} :  reporte))
+        await guardarArchivo(reportes, archivoReportes);
+        return res.json(reportes)
+    }
+    console.log("No se encontro la id deseada")
+    return res.status(404).json({message:"Error al cambiar el estado del usuario"})
+})
+
 app.listen(3001, () => {
     console.log("Escuchando el puerto 3001")
 })

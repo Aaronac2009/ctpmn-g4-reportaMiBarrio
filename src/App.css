@@ -228,6 +228,24 @@ summary {
   background-color: #1C3152;
 }
 
+.reporte>select{
+  width: 17%;
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  text-align: center;
+}
+
+.reporte>select:hover {
+  background-color: #1C3152;
+}
+
+.reporte>select option{
+  background-color: #1C3152;
+}
 
 .grupo-reporte:nth-child(odd) {
   background-color: #172943;

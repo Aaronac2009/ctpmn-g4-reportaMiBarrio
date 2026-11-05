@@ -100,6 +100,13 @@ function App() {
     setReportes(lista => lista.map(r => r.id === id ? { ...r, vistas: Math.max(r.vistas || 0, vistas) } : r))
   }
 
+  async function cambiarEstadoReporte(id, estado) {
+    const respuesta = await fetch(`${API}/${id}/${estado}`, {method: "PATCH"})
+    if (!respuesta.ok) throw new Error("No se pudo cambiar el estado del elemento")
+    const datos = await respuesta.json()
+    setReportes(datos)
+    
+  }
   return (
     <div className='app'>
       <Navbar vista={vista} onCambiarVista={setVista} />
@@ -128,7 +135,7 @@ function App() {
               </footer>
             </section>
             <button onClick={() => setMostrarModalAgregar(true)} className='boton-agregar'>Agregar un Reporte</button>
-            <ListaReportes reportes={resultados} confirmarVista={confirmarVista} eliminarReporte={eliminarReporte} />
+            <ListaReportes reportes={resultados} confirmarVista={confirmarVista} eliminarReporte={eliminarReporte} cambiarEstadoReporte={cambiarEstadoReporte} />
             {(consulta || Object.values(filtros).some(Boolean)) && resultados.length === 0 && <p role="status">Ningun reporte coincide con tu busqueda.</p>}
             {mostrarModalAgregar && (
               <AgregarReporte
