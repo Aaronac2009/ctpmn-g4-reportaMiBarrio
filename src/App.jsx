@@ -6,6 +6,8 @@ import ListaReportes from './components/ListaReportes'
 import AgregarReporte from './components/AgregarReporte'
 import Estadisticas from './components/Estadisticas'
 import LoginForm from './components/login'
+import AdminUsuarios from './components/AdminUusarios'
+
 
 const API = "http://localhost:3001/API"
 
@@ -107,6 +109,23 @@ function App() {
     setReportes(datos)
     
   }
+
+  async function obtenerUsuarios(setUsuarios){
+    console.log("Solicitud para obtener usuarios")
+    const respuesta = await fetch(`${API}/users`)
+    if (!respuesta.ok) throw new Error("No se pudo obtener la lista de usuarios")
+    const datos = await respuesta.json()
+    setUsuarios(datos)
+  }
+
+  async function eliminarUsuario(id, setUsuarios){
+    const respuesta = await fetch(`${API}/users/${id}`, {method:"DELETE"})
+    if (!respuesta.ok) throw new Error("No se pudo obtener la lista de usuarios")
+    const datos = await respuesta.json()
+    setUsuarios(datos)
+  }
+
+
   return (
     <div className='app'>
       <Navbar vista={vista} onCambiarVista={setVista} />
@@ -144,9 +163,9 @@ function App() {
               />
             )}
           </>
-        ) : (
+        ) : vista === "estadisticas" ?(
           <Estadisticas reportes={reportes} />
-        )}
+        ): (<AdminUsuarios obtenerUsuarios={obtenerUsuarios} eliminarUsuario={eliminarUsuario}></AdminUsuarios>)}
       </div>
     </div>
   )

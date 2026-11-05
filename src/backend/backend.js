@@ -14,7 +14,7 @@ const dirname = path.dirname(filename)
 const archivoReportes = path.join(dirname, "reportes.json")
 const archivoUsuarios = path.join(dirname, "usuarios.json")
 let reportes = JSON.parse(await readFile(archivoReportes, "utf-8"))
-const usuarios = JSON.parse(await readFile(archivoUsuarios, "utf-8"))
+let usuarios = JSON.parse(await readFile(archivoUsuarios, "utf-8"))
 let escritura = Promise.resolve()
 
 function actualizarReportes(transformar) {
@@ -126,6 +126,24 @@ app.patch("/API/:id/:estado", async (req, res) =>{
     }
     console.log("No se encontro la id deseada")
     return res.status(404).json({message:"Error al cambiar el estado del usuario"})
+})
+
+app.get("/API/users", (req, res) => {
+    console.log("Se solicito obtener la lista de usuarios")
+    return res.json(usuarios)
+})
+
+app.delete("/API/users/:id", async (req, res) =>{
+    console.log("Se solicito eliminar un usuario")
+    const id = parseInt(req.params.id)
+    console.log(id)
+    if (usuarios.findIndex(usuario => usuario.id === id) === -1){
+        console.log("No se pudo encontrar el usuario con la id buscada")
+        return res.status(404).json({message:"No se pudo encontrar el usuario con la id buscada"})
+    }
+    usuarios = usuarios.filter(usuario => usuario.id !== id)
+    await guardarArchivo(usuarios, archivoUsuarios)
+    return res.json(usuarios)
 })
 
 app.listen(3001, () => {

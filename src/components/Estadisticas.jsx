@@ -1,5 +1,5 @@
 const CATEGORIAS = ["vial", "alumbrado", "basura", "agua", "seguridad vial"]
-const ESTADOS = ["Por Completar"]
+const ESTADOS = ["pendiente", "en proceso", "completado"]
 
 const NOMBRES = {
     vial: "Vial",
@@ -7,7 +7,9 @@ const NOMBRES = {
     basura: "Basura",
     agua: "Agua",
     "seguridad vial": "Seguridad Vial",
-    "Por Completar": "Por Completar",
+    "pendiente" : "Pendiente",
+    "en proceso": "En proceso",
+    "completado" : "Completado"
 }
 
 function nombreDe(clave) {

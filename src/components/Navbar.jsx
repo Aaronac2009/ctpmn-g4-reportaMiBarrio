@@ -1,6 +1,7 @@
 import userPhotoGeneric from "../assets/userPhotoGeneric.png"
 import logo from "../assets/Reporta Mi Barrio Logo.png"
 export default function Navbar({ vista, onCambiarVista }){
+    const esAdmin = JSON.parse(localStorage.getItem("usuario")).rol === "admin"
     return(
         <div className="navbar">
             <img src={logo} className="logo-img" alt="" />
@@ -29,6 +30,12 @@ export default function Navbar({ vista, onCambiarVista }){
                 >
                     Estadisticas
                 </button>
+                {esAdmin ? <button
+                    className={vista === "administracion" ? "opcion-activa" : ""}
+                    onClick={() => onCambiarVista("administracion")}
+                >
+                    Administrar Usuarios
+                </button> : null}
             </div>
         </div>
     )
