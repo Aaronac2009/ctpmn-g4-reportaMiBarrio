@@ -565,7 +565,8 @@ n {
 
 .estadisticas {
   overflow: hidden;
-  padding: 90px;
+  padding: 20px;
+  padding-right: 40px;
   color: #fff;
 }
 
