@@ -1055,3 +1055,29 @@ n {
   .reporte .boton-visto { font-size: .72rem; padding: 3px 6px; }
   .reporte .contador-vistas { font-size: .7rem; margin-left: 4px; }
 }
+
+@media (max-width: 1150px) {
+  .estadisticas { padding: 30px; }
+  .estadisticas-encabezado h1 { font-size: 1.25rem; margin-bottom: 2px; }
+  .estadisticas-encabezado p { font-size: .85rem; margin-bottom: 12px; }
+  .estadistica-total { padding: 10px 12px; font-size: .9rem; margin-bottom: 16px; }
+  .estadisticas-grid { gap: 5px; }
+  .estadistica-tarjeta { padding: 20px; border-radius: 10px; }
+  .estadistica-tarjeta h2 { font-size: 1rem; margin-bottom: 12px; padding-bottom: 6px; }
+  .estadistica-lista { gap: 10px; }
+  .estadistica-etiqueta { font-size: .85rem; }
+  .estadistica-etiqueta strong { font-size: .9rem; }
+  .estadistica-barra-fondo { height: 8px; }
+  .admin-usuarios { margin: 10px 0; }
+  .admin-usuarios > h2 { font-size: 1.4rem; margin: 10px; }
+  .filtro-usuarios { margin: 0 10px; width: calc(100% - 20px); }
+  .panel-usuarios { margin: 10px; }
+  .panel-usuarios-header { display: none; }
+  .usuario { display: flex; flex-direction: column; gap: 0; padding: 6px 8px; text-align: left; font-size: .78rem; }
+  .usuario > * { width: 100% !important; display: flex; align-items: center; justify-content: space-between; gap: 4px; padding: 4px 0; border-bottom: 1px solid rgba(52, 71, 98, 0.5); background: transparent; }
+  .usuario > *:last-child { border-bottom: 0; }
+  .usuario > *::before { content: attr(data-label); font-weight: 700; color: #7fb3ff; font-size: .7rem; flex: 0 0 44%; text-align: left; }
+  .usuario > p { color: #fff; word-break: break-word; }
+  .usuario > button { background: #1C3152; border: 1px solid #344762; border-radius: 6px; padding: 3px 6px; cursor: pointer; font-size: .75rem; }
+  .usuario > select { background: #172943; border: 1px solid #344762; border-radius: 6px; padding: 3px 4px; font-size: .75rem; }
+}
