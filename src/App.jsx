@@ -63,7 +63,8 @@ function App() {
     ["vistas", "Confirmaciones", [["con", "Con confirmaciones"], ["sin", "Sin confirmaciones"]]]
   ]
   const termino = normalizar(consulta)
-  const resultados = reportes.filter(r =>
+  const resultados = reportes
+  .filter(r =>
     (!filtros.categoria || r.categoria === filtros.categoria) &&
     (!filtros.estado || r.estado === filtros.estado) &&
     (!filtros.foto || Boolean(r.imagen) === (filtros.foto === "con")) &&
@@ -71,6 +72,7 @@ function App() {
     normalizar(r.direccion).includes(normalizar(filtros.direccion).trim()) &&
     (!termino || [r.titulo, r.categoria, r.descripcion, r.direccion].some(campo => normalizar(campo).includes(termino)))
   )
+  .sort((a, b) => (Number(b?.vistas) || 0) - (Number(a?.vistas) || 0))
 
   async function agregarReporte(reporte) {
     try {
@@ -96,10 +98,21 @@ function App() {
   }
 
   async function confirmarVista(id) {
-    const respuesta = await fetch(`${API}/${id}/vistas`, { method: "POST" })
+    const usuario = JSON.parse(localStorage.getItem("usuario") || "null")
+    const respuesta = await fetch(`${API}/${id}/vistas`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ usuarioId: usuario?.id })
+    })
     if (!respuesta.ok) throw new Error("No se pudo registrar la confirmacion")
-    const { vistas } = await respuesta.json()
-    setReportes(lista => lista.map(r => r.id === id ? { ...r, vistas: Math.max(r.vistas || 0, vistas) } : r))
+    const { vistas, votantes, yaVoto } = await respuesta.json()
+    setReportes(lista => lista.map(r => r.id === id ? {
+      ...r,
+      vistas: Math.max(r.vistas || 0, vistas || 0),
+      votantes: Array.isArray(votantes) ? votantes.map(String) : (r.votantes || []),
+      yaVoto
+    } : r))
+    return yaVoto
   }
 
   async function cambiarEstadoReporte(id, estado) {

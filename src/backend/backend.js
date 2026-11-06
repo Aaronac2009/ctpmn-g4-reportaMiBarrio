@@ -13,8 +13,11 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 const archivoReportes = path.join(dirname, "reportes.json")
 const archivoUsuarios = path.join(dirname, "usuarios.json")
-let reportes = JSON.parse(await readFile(archivoReportes, "utf-8"))
-let usuarios = JSON.parse(await readFile(archivoUsuarios, "utf-8"))
+let reportes = JSON.parse(await readFile(archivoReportes, "utf-8")).map(reporte => ({
+    ...reporte,
+    votantes: Array.isArray(reporte?.votantes) ? reporte.votantes.map(String) : []
+}))
+const usuarios = JSON.parse(await readFile(archivoUsuarios, "utf-8"))
 let escritura = Promise.resolve()
 
 function actualizarReportes(transformar) {
@@ -40,19 +43,34 @@ app.get("/API", (req, res) => {
 
 app.post("/API", async (req, res) => {
     const siguientes = await actualizarReportes(lista => [
-        ...lista, { ...req.body, id: randomUUID(), vistas: 0 }
+        ...lista, { ...req.body, id: randomUUID(), vistas: 0, votantes: [] }
     ])
     res.status(201).json(siguientes)
 })
 
 app.post("/API/:id/vistas", async (req, res) => {
     const id = req.params.id
+    const usuarioId = req.body?.usuarioId ?? req.body?.userId ?? null
+    const usuarioNormalizado = usuarioId == null ? null : String(usuarioId)
+    let yaVoto = false
     const siguientes = await actualizarReportes(lista => {
-        return lista.map(r => String(r.id) === id ? { ...r, vistas: (Number(r.vistas) || 0) + 1 } : r)
+        return lista.map(r => {
+            if (String(r.id) !== id) return r
+            const votantes = Array.isArray(r.votantes) ? r.votantes.map(String) : []
+            if (usuarioNormalizado && votantes.includes(usuarioNormalizado)) {
+                yaVoto = true
+                return { ...r, votantes }
+            }
+            return {
+                ...r,
+                vistas: (Number(r.vistas) || 0) + 1,
+                votantes: usuarioNormalizado ? [...votantes, usuarioNormalizado] : votantes
+            }
+        })
     })
     const reporte = siguientes.find(r => String(r.id) === id)
     if (!reporte) return res.status(404).json({ error: "Reporte no encontrado" })
-    res.json({ vistas: reporte.vistas })
+    res.json({ vistas: reporte.vistas, yaVoto, votantes: reporte.votantes || [] })
 })
 
 app.delete("/API/:id", async (req, res) => {
