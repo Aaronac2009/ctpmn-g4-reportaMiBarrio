@@ -1,4 +1,5 @@
-# Reporta Mi Barrio  // Aaron A. Steven G. y Alvaro V.
+# Reporta Mi Barrio 
+# Aaron A. (Lider) Steven G. (Desarrollador de logica) y Alvaro V. (Desarrollador de interfaz)
 
 Reporta Mi Barrio es una aplicación web que permite a los
 vecinos reportar problemas de su comunidad, como baches,
@@ -8,29 +9,33 @@ La plataforma facilita el seguimiento de los reportes,
 la consulta de su estado y la participación de otros
 usuarios mediante el apoyo a reportes existentes.
 
-## Tecnologías utilizadas
+# Enlace
+https://reporta-mi-barrio.vercel.app
 
-### Frontend
+# Tecnologías utilizadas
+
+# Frontend
 - React
 - Vite
 - JavaScript
 - HTML5
 - CSS3
+- LocalStorage
 
-### Backend
+# Backend
 - Node.js
 - Express
 - CORS
-- Almacenamiento mediante archivos JSON y LocalStorage
+- Almacenamiento mediante archivos JSON 
 
-### Herramientas
+# Herramientas
 - Git
 - GitHub
 - Visual Studio Code
 - Vercel
 - Render
 
-## Funcionalidades
+# Funcionalidades
 
 - Registro e inicio de sesión de usuarios.
 - Creación de reportes comunitarios.
@@ -42,3 +47,10 @@ usuarios mediante el apoyo a reportes existentes.
 - Actualización del estado de los reportes.
 - Panel de estadísticas.
 - Administración de usuarios y roles.
+
+# Para correr en local:
+-npm install
+-npm run dev
+en otra terminal:
+-cd backend
+node backend.js
