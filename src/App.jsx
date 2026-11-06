@@ -9,8 +9,8 @@ import LoginForm from './components/login'
 import AdminUsuarios from './components/AdminUusarios'
 
 
-const API = "http://localhost:3001/API"
-
+const API = `${import.meta.env.VITE_API_URL}/API`
+console.log(API)
 function normalizar(texto = "") {
   return String(texto ?? "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
 }

@@ -6,7 +6,13 @@ import path from "node:path"
 import { fileURLToPath } from "node:url"
 
 const app = express()
-app.use(cors())
+// Estp es por el tema del deploy, todo lo del env se le asigna desde render
+const origenesPermitidos = [
+    "http://localhost:5173",
+    process.env.FRONTEND_URL
+].filter(Boolean)
+
+app.use(cors({origin:origenesPermitidos}))
 app.use(express.json({ limit: "1mb" }))
 
 const filename = fileURLToPath(import.meta.url)
@@ -17,7 +23,7 @@ let reportes = JSON.parse(await readFile(archivoReportes, "utf-8")).map(reporte 
     ...reporte,
     votantes: Array.isArray(reporte?.votantes) ? reporte.votantes.map(String) : []
 }))
-const usuarios = JSON.parse(await readFile(archivoUsuarios, "utf-8"))
+let usuarios = JSON.parse(await readFile(archivoUsuarios, "utf-8"))
 let escritura = Promise.resolve()
 
 function actualizarReportes(transformar) {
@@ -178,6 +184,8 @@ app.patch("/API/users/:id/:rol", async (req, res) =>{
     return res.status(404).json({message:"Error al cambiar el estado del usuario"})
 })
 
-app.listen(3001, () => {
+
+const PORT = process.env.PORT || 3001
+app.listen(PORT, () => {
     console.log("Escuchando el puerto 3001")
 })

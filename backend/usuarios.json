@@ -17,7 +17,7 @@
     "id": 2,
     "nombre": "Felix Cordero Murillo",
     "email": "felixcordero@gmail.com",
-    "rol": "user",
+    "rol": "admin",
     "password": "1234"
   }
 ]

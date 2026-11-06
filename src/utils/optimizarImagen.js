@@ -19,7 +19,6 @@ export async function optimizarImagen(archivo) {
       contexto.drawImage(imagen, 0, 0, canvas.width, canvas.height)
       const datos = canvas.toDataURL("image/jpeg", 0.88)
       if (!datos.startsWith("data:image/")) throw new Error("Imagen invalida")
-      if (datos.length <= 640 * 1024) return datos
       escala *= 0.75
       if (escala < 0.05) return datos
     }

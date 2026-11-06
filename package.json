@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "backend": "node --watch src/backend/backend.js",
+    "backend": "node --watch backend/backend.js",
+    "start": "node backend/backend.js",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
