@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 export default function AdminUsuarios({obtenerUsuarios, eliminarUsuario, cambiarRol}){
     const [usuarios, setUsuarios] = useState([])
     const usuarioActual = JSON.parse(localStorage.getItem("usuario")).id
-    const [filtro, setFiltro] = useState(null)
+    const [filtro, setFiltro] = useState("")
 
     useEffect(() => {
         obtenerUsuarios(setUsuarios)
@@ -23,14 +23,14 @@ export default function AdminUsuarios({obtenerUsuarios, eliminarUsuario, cambiar
                 </div>
                 {usuarios.filter(usuario => ((filtro && filtro === usuario.rol) || !filtro) && usuario.id !== usuarioActual).map(
                     usuario => <div key={usuario.id} className="usuario">
-                        <p>{usuario.id}</p>
-                        <p>{usuario.nombre}</p>
-                        <p>{usuario.email}</p>
-                        <select value={usuario.rol} onChange={(e) => cambiarRol(usuario.id, e.target.value, setUsuarios)}>
+                        <p data-label="ID">{usuario.id}</p>
+                        <p data-label="Nombre">{usuario.nombre}</p>
+                        <p data-label="Correo">{usuario.email}</p>
+                        <select data-label="Rol" value={usuario.rol} onChange={(e) => cambiarRol(usuario.id, e.target.value, setUsuarios)}>
                             <option value="admin">Administrador</option>
                             <option value="user">Usuario</option>
                         </select>
-                        <button onClick={() => {if(window.confirm("Seguro de que desea eliminar al usuario?")) eliminarUsuario(usuario.id, setUsuarios)}}>Eliminar</button>
+                        <button data-label="Accion" onClick={() => {if(window.confirm("Seguro de que desea eliminar al usuario?")) eliminarUsuario(usuario.id, setUsuarios)}}>Eliminar</button>
                     </div>
                 )}
 
