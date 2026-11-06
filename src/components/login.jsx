@@ -3,6 +3,7 @@ import logo from "../assets/Reporta Mi Barrio Logo.png"
 
 
 export default function LoginForm(){
+    const API = `${import.meta.env.VITE_API_URL}/API`
     const [error, setError] = useState(null)
     const [type, setType] = useState("login")
     const [datosPrefill, setDatosPrefill] = useState({ nombre: "", email: "", password: "" })
@@ -18,7 +19,7 @@ export default function LoginForm(){
         const formdata = new FormData(e.target)
         const email = formdata.get("email")
         const password = formdata.get("password")
-        const respuesta = await fetch("http://localhost:3001/API/login", {
+        const respuesta = await fetch(`${API}/login`, {
             method:"POST",
             headers:{"Content-Type":"application/json"},
             body: JSON.stringify({email: email, password: password})
@@ -45,7 +46,7 @@ export default function LoginForm(){
         const email = formdata.get("email").toLowerCase()
         const password = formdata.get("password")
 
-        const respuesta = await fetch("http://localhost:3001/API/login/create", {
+        const respuesta = await fetch(`${API}/login/create`, {
             method:"POST",
             headers:{"Content-Type":"application/json"},
             body: JSON.stringify({nombre: nombre, email: email, password: password})
