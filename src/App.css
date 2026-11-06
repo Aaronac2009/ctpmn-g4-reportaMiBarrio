@@ -633,7 +633,9 @@ n {
 /* Estadisticas */
 
 .estadisticas {
-  padding: 30px;
+  overflow: hidden;
+  padding: 20px;
+  padding-right: 40px;
   color: #fff;
 }
 
