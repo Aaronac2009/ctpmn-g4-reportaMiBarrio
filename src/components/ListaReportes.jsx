@@ -53,7 +53,7 @@ export default function ListaReportes({ reportes, confirmarVista, eliminarReport
                 <p>Direccion</p>
                 <p>Lo viste?</p>
                 <p>Imagen</p>
-                <p>Estado</p>
+                {esAdmin && <p>Estado</p> }
                 <p>Accion</p>
             </div>
             {reportesOrdenados.map(reporte => (

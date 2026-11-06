@@ -49,7 +49,7 @@ details {
 .user-options {
   position: fixed;
   background-color: var(--Blue);
-  ;
+  border: 1px solid #344762;
   width: 220px;
   border-radius: 10px;
 }
@@ -121,23 +121,12 @@ summary {
 .panel-busqueda {
   margin: clamp(12px, 2vw, 26px);
   padding: clamp(16px, 3vw, 32px);
-  border: 1px solid #344762;
   border-radius: 20px;
   color: #fff;
 }
 
 .boton-desplegar-filtros {
   display: none;
-  width: 100%;
-  margin: 8px 0 4px;
-  padding: 10px;
-  background: #1C3152;
-  color: #fff;
-  border: 1px solid #344762;
-  border-radius: 10px;
-  font: inherit;
-  cursor: pointer;
-  transition: background .2s ease;
 }
 
 .seccion-barrio {
@@ -159,7 +148,6 @@ summary {
   display: flex;
   gap: 8px;
   background: #0d1a2e;
-  border: 1px solid #344762;
   border-radius: 14px;
   padding: 6px;
   transition: border-color .2s ease, box-shadow .2s ease;
@@ -224,12 +212,11 @@ summary {
 .filtros-reportes input {
   width: 100%;
   min-width: 0;
+  border: 0;
   padding: 10px 12px;
-  border: 1px solid #344762;
   border-radius: 10px;
   color: #fff;
   background: #172943;
-  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
 }
 
 .filtros-reportes select:hover,
@@ -240,11 +227,11 @@ summary {
 .filtros-reportes select:focus,
 .filtros-reportes input:focus {
   outline: none;
-  border-color: #4c83c5;
   box-shadow: 0 0 0 3px rgba(76, 131, 197, 0.18);
 }
 
-.filtros-reportes select option {
+.filtros-reportes select optio
+n {
   background: #1C3152;
   color: #fff;
 }
@@ -963,15 +950,33 @@ summary {
     padding: 10px;
     background: #1C3152;
     color: #fff;
-    border: 1px solid #344762;
+    border: 1px solid #344762; 
     border-radius: 10px;
     font: inherit;
     cursor: pointer;
     transition: background .2s ease;
   }
-  .boton-desplegar-filtros:hover { background: #29466f; }
-  .filtros-reportes.cerrados { display: none; }
-  .filtros-reportes.abiertos { display: grid; position: absolute; top: 100%; left: 10px; right: 10px; z-index: 20; background: #111D33; border: 1px solid #344762; border-radius: 12px; padding: 12px; box-shadow: 0 12px 28px rgba(0,0,0,0.45); }
+  .boton-desplegar-filtros:hover { 
+    background: #29466f; 
+  }
+  .filtros-reportes.cerrados { 
+    display: none; 
+  }
+  .filtros-reportes.abiertos { 
+    display: grid; 
+    position: absolute; 
+    top: 100%; 
+    left: 
+    10px; 
+    right: 
+    10px; 
+    z-index: 20; 
+    background: #111D33; 
+    border: 1px solid #344762; 
+    border-radius: 12px; 
+    padding: 12px; 
+    box-shadow: 0 12px 28px rgba(0,0,0,0.45); 
+  }
   .panel-busqueda footer { 
     flex-direction: column; 
     align-items: stretch; 
