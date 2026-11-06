@@ -399,6 +399,7 @@ n {
     gap: 8px;
     padding: 6px 10px;
     border: 1px solid #344762;
+    border-radius: 999px;
     background-color: #1C3152;
     color: #fff;
     cursor: pointer;
