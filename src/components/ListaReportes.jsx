@@ -46,7 +46,7 @@ export default function ListaReportes({ reportes, confirmarVista, eliminarReport
     const [foto, setFoto] = useState(null)
     return (
         <div className="lista-reportes">
-            <div className={`lista-reportes-header ${esAdmin ? "admin" : "usuario"}`}>
+            <div className={`lista-reportes-header ${esAdmin ? "admin" : "usuarios"}`}>
                 <p>Titulo</p>
                 <p>Categoria</p>
                 <p>Descripcion</p>
@@ -59,7 +59,7 @@ export default function ListaReportes({ reportes, confirmarVista, eliminarReport
             </div>
             {reportesOrdenados.map(reporte => (
                 <div className="grupo-reporte" key={reporte.id}>
-                <div className={`reporte ${esAdmin ? "admin" : "usuario"}`}>
+                <div className={`reporte ${esAdmin ? "admin" : "usuarios"}`}>
                     <p data-label="Titulo">{reporte.titulo}</p>
                     <p data-label="Categoria">{reporte.categoria}</p>
                     <p data-label="Descripcion">{reporte.descripcion}</p>

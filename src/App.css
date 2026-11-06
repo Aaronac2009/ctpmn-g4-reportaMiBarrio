@@ -425,8 +425,8 @@ n {
 }
 
 
-.lista-reportes-header.usuario,
-.reporte.usuario {
+.lista-reportes-header.usuarios,
+.reporte.usuarios {
   grid-template-columns:
     1.2fr
     0.8fr
@@ -1123,4 +1123,108 @@ n {
   .reporte .miniatura img { width: 48px; height: auto; }
   .reporte .boton-visto { font-size: .72rem; padding: 3px 6px; }
   .reporte .contador-vistas { font-size: .7rem; margin-left: 4px; }
+
+    .admin-usuarios > h2 {
+    font-size: 25px;
+  }
+
+  .panel-usuarios {
+    margin: 12px;
+  }
+
+  .panel-usuarios-header,
+  .panel-usuarios .usuario {
+    font-size: 0.85rem;
+  }
+
+  .panel-usuarios-header > p,
+  .panel-usuarios .usuario > p,
+  .panel-usuarios .usuario > button,
+  .panel-usuarios .usuario > select {
+    width: 20%;
+    padding: 8px 3px;
+  }
+}
+
+/* Celulares */
+@media (max-width: 600px) {
+
+  .admin-usuarios {
+    margin: 20px 0;
+  }
+
+  .admin-usuarios > h2 {
+    font-size: 22px;
+    margin: 15px;
+  }
+
+  .panel-usuarios {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 12px;
+    background: transparent;
+  }
+
+  /* Ocultar encabezado de tabla */
+  .panel-usuarios-header {
+    display: none;
+  }
+
+  /* Cada usuario se convierte en una tarjeta */
+  .panel-usuarios .usuario {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #344762;
+    border-radius: 10px;
+    background-color: #111D33;
+  }
+
+  /* Cada dato ocupa una fila */
+  .panel-usuarios .usuario > p,
+  .panel-usuarios .usuario > button,
+  .panel-usuarios .usuario > select {
+    width: 100%;
+    min-height: 38px;
+    margin: 0;
+    padding: 8px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(52, 71, 98, 0.5);
+    font-size: 0.85rem;
+  }
+
+  /* Etiquetas de los datos */
+  .panel-usuarios .usuario > *::before {
+    content: attr(data-label);
+    color: #7fb3ff;
+    font-weight: bold;
+    text-align: left;
+  }
+
+  .panel-usuarios .usuario > *:last-child {
+    border-bottom: none;
+  }
+
+  .panel-usuarios .usuario > button {
+    cursor: pointer;
+    color: #fff;
+  }
+
+  .panel-usuarios .usuario > select {
+    color: #fff;
+    background-color: #172943;
+    text-align: right;
+  }
+
+  .filtro-usuarios {
+    width: calc(100% - 30px);
+    margin: 0 15px;
+    box-sizing: border-box;
+  }
 }
