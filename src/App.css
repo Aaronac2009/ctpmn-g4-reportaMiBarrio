@@ -126,6 +126,20 @@ summary {
   color: #fff;
 }
 
+.boton-desplegar-filtros {
+  display: none;
+  width: 100%;
+  margin: 8px 0 4px;
+  padding: 10px;
+  background: #1C3152;
+  color: #fff;
+  border: 1px solid #344762;
+  border-radius: 10px;
+  font: inherit;
+  cursor: pointer;
+  transition: background .2s ease;
+}
+
 .seccion-barrio {
   color: #7fb3ff;
   font-size: .7rem;
@@ -283,41 +297,6 @@ summary {
   color: #fff;
 }
 
-@media (max-width: 640px) {
-  .app {
-    flex-direction: column;
-  }
-
-  .navbar,
-  .main {
-    width: 100%;
-  }
-
-  .navbar {
-    height: auto;
-  }
-
-  .navbar .user,
-  .navbar .options {
-    display: inline-flex;
-    width: auto;
-    vertical-align: middle;
-  }
-
-  .navbar .user-photo {
-    display: none;
-  }
-
-  .navbar .user-name,
-  .navbar .options>button {
-    font-size: .9rem;
-  }
-
-  .navbar .options {
-    flex-direction: row;
-    gap: 10px;
-  }
-}
 
 
 
@@ -921,4 +900,153 @@ summary {
   border: 2px solid #263c5d;
   margin: 0px 20px;
   color: #fff;
+}
+
+/* Responsive: telefonos */
+@media (max-width: 1150px) {
+  .app { 
+    flex-direction: column; 
+  }
+  .navbar, .main { 
+    width: 100%; 
+  }
+  .navbar { 
+    height: auto; 
+    padding: 8px; 
+  }
+  .navbar .logo-img { 
+    height: 44px; }
+  .navbar .user { 
+    margin: 8px 0; 
+  }
+  .navbar .user-photo { 
+    display: none; }
+  .navbar .user-name, .navbar .options > button { 
+    font-size: .9rem; 
+  }
+  .navbar .options { 
+    flex-direction: row; 
+    flex-wrap: wrap; 
+
+
+/* Boton para desplegar filtros (solo telefonos) */
+.boton-desplegar-filtros {
+  display: none;
+}
+    gap: 6px; 
+    margin-top: 8px; 
+  }
+  .navbar .options > button { 
+    width: auto; 
+    padding: 8px 10px; 
+    margin: 0; 
+    font-size: .85rem; 
+  }
+
+  .panel-busqueda { 
+    margin: 10px; 
+    padding: 14px; 
+    border-radius: 14px; 
+    position: relative;
+
+  }
+  .panel-busqueda h1 { 
+    font-size: 1.35rem; 
+  }
+  .filtros-reportes {
+    grid-template-columns: 1fr; gap: 10px;
+  }
+  .boton-desplegar-filtros {
+    display: block;
+    width: 100%;
+    margin: 8px 0 4px;
+    padding: 10px;
+    background: #1C3152;
+    color: #fff;
+    border: 1px solid #344762;
+    border-radius: 10px;
+    font: inherit;
+    cursor: pointer;
+    transition: background .2s ease;
+  }
+  .boton-desplegar-filtros:hover { background: #29466f; }
+  .filtros-reportes.cerrados { display: none; }
+  .filtros-reportes.abiertos { display: grid; position: absolute; top: 100%; left: 10px; right: 10px; z-index: 20; background: #111D33; border: 1px solid #344762; border-radius: 12px; padding: 12px; box-shadow: 0 12px 28px rgba(0,0,0,0.45); }
+  .panel-busqueda footer { 
+    flex-direction: column; 
+    align-items: stretch; 
+    gap: 10px; }
+  .panel-busqueda footer button { 
+    width: 100%; 
+    text-align: center; 
+  }
+
+  .boton-agregar { 
+    margin: 12px 10px 0; 
+    width: calc(100% - 20px); 
+  }
+
+  /* Lista de reportes como fichas (2 por fila) */
+  .lista-reportes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin: 10px;
+  }
+  .lista-reportes-header { display: none; }
+  .grupo-reporte {
+    border: 1px solid #344762;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #111D33;
+    margin: 0;
+  }
+  .reporte {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 6px 8px;
+    text-align: left;
+    font-size: .78rem;
+  }
+  .reporte > * {
+    width: 100% !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px;
+    padding: 4px 0;
+    border-bottom: 1px solid rgba(52, 71, 98, 0.5);
+    background: transparent;
+  }
+  .reporte > *:last-child { border-bottom: 0; }
+  .reporte > *::before {
+    content: attr(data-label);
+    font-weight: 700;
+    color: #7fb3ff;
+    font-size: .7rem;
+    flex: 0 0 44%;
+    text-align: left;
+  }
+  .reporte > p { color: #fff; word-break: break-word; }
+  .reporte button {
+    background: #1C3152;
+    border: 1px solid #344762;
+    border-radius: 6px;
+    padding: 3px 6px;
+    cursor: pointer;
+    font-size: .75rem;
+  }
+  .reporte button:hover { background: #29466f; }
+  .reporte select {
+    background: #172943;
+    border: 1px solid #344762;
+    border-radius: 6px;
+    padding: 3px 4px;
+    font-size: .75rem;
+  }
+  .reporte .img-container { justify-content: flex-end; }
+  .reporte .miniatura img { width: 48px; height: auto; }
+  .reporte .boton-visto { font-size: .72rem; padding: 3px 6px; }
+  .reporte .contador-vistas { font-size: .7rem; margin-left: 4px; }
 }

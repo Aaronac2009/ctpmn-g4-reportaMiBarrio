@@ -22,6 +22,7 @@ function App() {
   const [filtros, setFiltros] = useState({})
   const [mostrarModalAgregar, setMostrarModalAgregar] = useState(false)
   const [vista, setVista] = useState("menu")
+  const [filtrosAbiertos, setFiltrosAbiertos] = useState(false)
 
   useEffect(() => {
     if (!hayUsuario) return
@@ -156,7 +157,15 @@ function App() {
               <header>
               </header>
               <SearchBar onBuscar={setConsulta} />
-              <div className="filtros-reportes" role="group" aria-label="Filtros de busqueda">
+              <button
+                type="button"
+                className="boton-desplegar-filtros"
+                onClick={() => setFiltrosAbiertos(a => !a)}
+                aria-expanded={filtrosAbiertos}
+              >
+                {filtrosAbiertos ? "Ocultar filtros ▴" : "Mostrar filtros ▾"}
+              </button>
+              <div className={`filtros-reportes ${filtrosAbiertos ? "abiertos" : "cerrados"}`} role="group" aria-label="Filtros de busqueda">
                 {campos.map(([campo, etiqueta, valores]) => (
                   <label key={campo}>{etiqueta}
                     <select value={filtros[campo] || ""} onChange={e => cambiarFiltro(campo, e.target.value)}>

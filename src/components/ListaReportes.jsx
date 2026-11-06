@@ -51,24 +51,25 @@ export default function ListaReportes({ reportes, confirmarVista, eliminarReport
                 <p>Categoria</p>
                 <p>Descripcion</p>
                 <p>Direccion</p>
-                {esAdmin ? null : <p>Lo viste?</p>}
+                <p>Lo viste?</p>
                 <p>Imagen</p>
-                {esAdmin ? <p>Estado</p> : null}
+                <p>Estado</p>
                 <p>Accion</p>
             </div>
             {reportesOrdenados.map(reporte => (
                 <div className="grupo-reporte" key={reporte.id}>
                 <div className="reporte">
-                    <p>{reporte.titulo}</p>
-                    <p>{reporte.categoria}</p>
-                    <p>{reporte.descripcion}</p>
-                    <p>{reporte.direccion}</p>
-                    {esAdmin ? null : <button onClick={() => marcar(reporte.id)}>Sí</button>}
+                    <p data-label="Titulo">{reporte.titulo}</p>
+                    <p data-label="Categoria">{reporte.categoria}</p>
+                    <p data-label="Descripcion">{reporte.descripcion}</p>
+                    <p data-label="Direccion">{reporte.direccion}</p>
+                    {esAdmin ? null : <button data-label="Lo viste?" onClick={() => marcar(reporte.id)}>Sí</button>}
                     {(() => {
                         const yaVoto = (reporte.votantes || []).map(String).includes(String(usuarioActual?.id))
                         return (
                             <button
                                 type="button"
+                                data-label="Confirmaciones"
                                 disabled={yaVoto}
                                 className={`boton-visto ${presionados[reporte.id] ? "boton-visto-activo" : ""} ${yaVoto ? "boton-visto-votado" : ""}`}
                                 onClick={() => { if (!yaVoto) marcar(reporte.id) }}
@@ -81,18 +82,18 @@ export default function ListaReportes({ reportes, confirmarVista, eliminarReport
                             </button>
                         )
                     })()}
-                    {reporte.imagen ? <div className="img-container">
+                    {reporte.imagen ? <div className="img-container" data-label="Imagen">
                         <button className="miniatura" aria-label={`Ampliar foto de ${reporte.titulo}`} onClick={() => {
                             setFoto(reporte)
                             visor.current.showModal()
                         }}><img src={reporte.imagen} width="50" loading="lazy" alt="" /></button>
-                    </div> : <p>No</p>}
-                    {esAdmin ? <select value={reporte.estado} onChange={(e) => cambiarEstado(e, reporte.id)}>
+                    </div> : <p data-label="Imagen">No</p>}
+                    {esAdmin ? <select data-label="Estado" value={reporte.estado} onChange={(e) => cambiarEstado(e, reporte.id)}>
                         <option value="pendiente">Pendiente</option>
                         <option value="en proceso">En Proceso</option>
                         <option value="completado">Completado</option>
                     </select> : null}
-                    <button onClick={() => eliminar(reporte)}>Eliminar</button>
+                    <button data-label="Accion" onClick={() => eliminar(reporte)}>Eliminar</button>
                 </div>
                     {errores[reporte.id] && <p role="alert">{errores[reporte.id]}</p>}
                 </div>
