@@ -1,11 +1,12 @@
-*{
+* {
   box-sizing: border-box;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 }
 
-body{
+body {
   margin: 0;
   background-color: #011D33;
-
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 }
 
 .app{

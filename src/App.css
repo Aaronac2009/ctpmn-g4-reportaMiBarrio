@@ -1,3 +1,4 @@
+
 :root {
   --DarkBlue: #080F1E;
   --DarkerBlue: #011D33;
@@ -122,30 +123,37 @@ summary {
   padding: clamp(16px, 3vw, 32px);
   border: 1px solid #344762;
   border-radius: 20px;
-  background: #111D33;
   color: #fff;
-  font-family: "Segoe UI", sans-serif;
 }
 
 .seccion-barrio {
-  color: #fff;
+  color: #7fb3ff;
   font-size: .7rem;
-  letter-spacing: .14em;
+  letter-spacing: .18em;
   font-weight: 700;
+  text-transform: uppercase;
+  margin: 0 0 4px;
 }
 
 .panel-busqueda h1 {
-  margin: 5px 0 18px;
+  margin: 0 0 18px;
   font-size: clamp(1.5rem, 3vw, 2.25rem);
+  line-height: 1.15;
 }
 
 .searchbar {
   display: flex;
-  gap: 6px;
-  background: #172943;
+  gap: 8px;
+  background: #0d1a2e;
   border: 1px solid #344762;
-  border-radius: 12px;
-  padding: 5px;
+  border-radius: 14px;
+  padding: 6px;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.searchbar:focus-within {
+  border-color: #4c83c5;
+  box-shadow: 0 0 0 3px rgba(76, 131, 197, 0.18);
 }
 
 .searchbar input {
@@ -153,18 +161,29 @@ summary {
   background: transparent;
   flex: 1;
   min-width: 0;
-  padding: 10px;
+  padding: 10px 12px;
   border: 0;
   border-radius: 8px;
-  font: inherit;
+}
+
+.searchbar input::placeholder {
+  color: #acbfd0;
 }
 
 .searchbar-button {
-  width: 44px;
+  width: 46px;
   border: 0;
-  border-radius: 8px;
-  background: var(--Blue);
+  border-radius: 10px;
+  background: #1958a4;
   cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: transform .15s ease, filter .15s ease;
+}
+
+.searchbar-button:hover {
+  filter: brightness(1.15);
+  transform: translateY(-1px);
 }
 
 .searchbar-img {
@@ -174,7 +193,7 @@ summary {
 
 .filtros-reportes {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 145px), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
   gap: 14px;
   margin: 20px 0;
 }
@@ -184,21 +203,38 @@ summary {
   gap: 6px;
   font-size: .85rem;
   font-weight: 600;
+  color: #c6d5eb;
 }
 
 .filtros-reportes select,
 .filtros-reportes input {
   width: 100%;
   min-width: 0;
-  padding: 10px;
+  padding: 10px 12px;
   border: 1px solid #344762;
-  border-radius: 8px;
+  border-radius: 10px;
   color: #fff;
   background: #172943;
-  font: inherit;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
 }
 
-.searchbar input::placeholder,
+.filtros-reportes select:hover,
+.filtros-reportes input:hover {
+  background: #1a2f4d;
+}
+
+.filtros-reportes select:focus,
+.filtros-reportes input:focus {
+  outline: none;
+  border-color: #4c83c5;
+  box-shadow: 0 0 0 3px rgba(76, 131, 197, 0.18);
+}
+
+.filtros-reportes select option {
+  background: #1C3152;
+  color: #fff;
+}
+
 .filtros-reportes input::placeholder {
   color: #acbfd0;
 }
@@ -211,24 +247,34 @@ summary {
   border-top: 1px solid #344762;
   padding-top: 14px;
   font-size: .87rem;
+  color: #c6d5eb;
 }
 
 .panel-busqueda footer button {
   color: #fff;
-  background: transparent;
-  border: 0;
-  padding: 6px;
+  background: #1C3152;
+  border: 1px solid #344762;
+  border-radius: 8px;
+  padding: 6px 12px;
   cursor: pointer;
-  font: inherit;
+  transition: background .2s ease, border-color .2s ease;
+}
+
+.panel-busqueda footer button:hover:not(:disabled) {
+  background: #29466f;
+  border-color: #4c83c5;
 }
 
 .panel-busqueda footer button:disabled {
   color: #a6b4c2;
+  background: transparent;
+  border-color: #344762;
   cursor: default;
+  opacity: .6;
 }
 
 .panel-busqueda :focus-visible {
-  outline: 3px solid #fff;
+  outline: 3px solid #7fb3ff;
   outline-offset: 2px;
 }
 
@@ -309,7 +355,6 @@ summary {
   background-color: #1C3152;
   border-radius: 10px 10px 0 0;
   display: flex;
-  font-weight: bold;
   text-align: center;
 }
 
