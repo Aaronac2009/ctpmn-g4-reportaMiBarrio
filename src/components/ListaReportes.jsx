@@ -1,6 +1,6 @@
 import { useRef, useState } from "react"
 
-export default function ListaReportes({ reportes, confirmarVista, eliminarReporte, cambiarEstadoReporte }) {
+export default function ListaReportes({ reportes, confirmarVista, eliminarReporte, cambiarEstadoReporte, actualizarComentario}) {
     const [errores, setErrores] = useState({})
     const esAdmin = JSON.parse(localStorage.getItem("usuario")).rol === "admin"
     const [presionados, setPresionados] = useState({})
@@ -46,19 +46,20 @@ export default function ListaReportes({ reportes, confirmarVista, eliminarReport
     const [foto, setFoto] = useState(null)
     return (
         <div className="lista-reportes">
-            <div className="lista-reportes-header">
+            <div className={`lista-reportes-header ${esAdmin ? "admin" : "usuario"}`}>
                 <p>Titulo</p>
                 <p>Categoria</p>
                 <p>Descripcion</p>
                 <p>Direccion</p>
                 <p>Lo viste?</p>
                 <p>Imagen</p>
-                {esAdmin && <p>Estado</p> }
+                {esAdmin && (<p>Estado</p> )}
+                {esAdmin && (<p>Comentarios</p> )}
                 <p>Accion</p>
             </div>
             {reportesOrdenados.map(reporte => (
                 <div className="grupo-reporte" key={reporte.id}>
-                <div className="reporte">
+                <div className={`reporte ${esAdmin ? "admin" : "usuario"}`}>
                     <p data-label="Titulo">{reporte.titulo}</p>
                     <p data-label="Categoria">{reporte.categoria}</p>
                     <p data-label="Descripcion">{reporte.descripcion}</p>
@@ -92,6 +93,25 @@ export default function ListaReportes({ reportes, confirmarVista, eliminarReport
                         <option value="en proceso">En Proceso</option>
                         <option value="completado">Completado</option>
                     </select> : null}
+                    {esAdmin && (
+                        <div data-label="Comentario Admin" style={{ display: 'flex', flexDirection: 'column', gap: '4px', marginTop: '8px' }}>
+                            <textarea 
+                                placeholder="Comentario de administración..." 
+                                defaultValue={reporte.comentarios || ""}
+                                onBlur={(e) => actualizarComentario(reporte.id, e.target.value)}
+                                style={{ 
+                                    width: '100%', 
+                                    minHeight: '50px', 
+                                    fontSize: '0.85em', 
+                                    padding: '6px', 
+                                    borderRadius: '4px', 
+                                    border: '1px solid #ccc',
+                                    resize: 'vertical'
+                                }}
+                            />
+                            <small style={{ color: '#666', fontSize: '0.75em' }}></small>
+                        </div>
+                    )}
                     <button data-label="Accion" onClick={() => eliminar(reporte)}>Eliminar</button>
                 </div>
                     {errores[reporte.id] && <p role="alert">{errores[reporte.id]}</p>}

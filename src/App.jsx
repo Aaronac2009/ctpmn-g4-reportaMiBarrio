@@ -146,6 +146,20 @@ function App() {
     setUsuarios(datos)
   }
 
+  async function actualizarComentario(id, comentarios) {
+    try {
+      const respuesta = await fetch(`${API}/${id}/comentarios`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ comentarios })
+      })
+      if (!respuesta.ok) throw new Error("No se pudo actualizar el comentario")
+      setReportes(lista => lista.map(r => r.id === id ? { ...r, comentarios } : r))
+    } catch (error) {
+      console.error("Error al guardar comentario:", error)
+    }
+  }
+
   return (
     <div className='app'>
       <Navbar vista={vista} onCambiarVista={setVista} />
@@ -182,7 +196,7 @@ function App() {
               </footer>
             </section>
             <button onClick={() => setMostrarModalAgregar(true)} className='boton-agregar'>Agregar un Reporte</button>
-            <ListaReportes reportes={resultados} confirmarVista={confirmarVista} eliminarReporte={eliminarReporte} cambiarEstadoReporte={cambiarEstadoReporte} />
+            <ListaReportes reportes={resultados} confirmarVista={confirmarVista} eliminarReporte={eliminarReporte} cambiarEstadoReporte={cambiarEstadoReporte} actualizarComentario={actualizarComentario}/>
             {(consulta || Object.values(filtros).some(Boolean)) && resultados.length === 0 && <p role="status">Ningun reporte coincide con tu busqueda.</p>}
             {mostrarModalAgregar && (
               <AgregarReporte

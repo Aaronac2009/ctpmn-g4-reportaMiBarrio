@@ -137,6 +137,20 @@ app.post("/API/login/create", async (req, res) => {
     return res.status(201).json({ id: id, nombre: nombre, rol: rol })
 })
 
+app.patch("/API/:id/comentarios", async (req, res) => {
+    console.log("Solicitud para agregar comentarios")
+    const id = req.params.id;
+    const { comentarios } = req.body;
+    
+    await actualizarReportes(lista => 
+        lista.map(reporte => 
+            reporte.id === id ? { ...reporte, comentarios: comentarios || "" } : reporte
+        )
+    );
+    res.json({ message: "Comentario actualizado correctamente" });
+});
+
+
 app.patch("/API/:id/:estado", async (req, res) =>{
     console.log("Se socilicto cambiar el estado de un elemento")
     const id = req.params.id
