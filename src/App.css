@@ -314,7 +314,6 @@ n {
   display: grid;
   border-radius: 10px;
   margin: 20px;
-  background-color: var(--DarkBlue);
   color: #fff;
 }
 
@@ -565,7 +564,8 @@ n {
 /* Estadisticas */
 
 .estadisticas {
-  padding: 30px;
+  overflow: hidden;
+  padding: 90px;
   color: #fff;
 }
 
@@ -1058,7 +1058,9 @@ n {
 }
 
 @media (max-width: 1150px) {
-  .estadisticas { padding: 30px; }
+  .estadisticas {
+    overflow: hidden;
+  }
   .estadisticas-encabezado h1 { font-size: 1.25rem; margin-bottom: 2px; }
   .estadisticas-encabezado p { font-size: .85rem; margin-bottom: 12px; }
   .estadistica-total { padding: 10px 12px; font-size: .9rem; margin-bottom: 16px; }
