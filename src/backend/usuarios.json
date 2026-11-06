@@ -12,5 +12,12 @@
     "email": "stevengarita64@gmail.com",
     "rol": "user",
     "password": "steven64"
+  },
+  {
+    "id": 2,
+    "nombre": "Felix Cordero Murillo",
+    "email": "felixcordero@gmail.com",
+    "rol": "user",
+    "password": "1234"
   }
 ]

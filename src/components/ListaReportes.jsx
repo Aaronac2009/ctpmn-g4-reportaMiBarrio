@@ -63,7 +63,6 @@ export default function ListaReportes({ reportes, confirmarVista, eliminarReport
                     <p data-label="Categoria">{reporte.categoria}</p>
                     <p data-label="Descripcion">{reporte.descripcion}</p>
                     <p data-label="Direccion">{reporte.direccion}</p>
-                    {esAdmin ? null : <button data-label="Lo viste?" onClick={() => marcar(reporte.id)}>Sí</button>}
                     {(() => {
                         const yaVoto = (reporte.votantes || []).map(String).includes(String(usuarioActual?.id))
                         return (
